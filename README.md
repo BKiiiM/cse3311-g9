@@ -1,4 +1,4 @@
-# cse3311-g9
+Cooking Recipe Generator Application
 
 Group 9's Project: AI generated recipes.
 
