@@ -43,7 +43,4 @@ Features:
   Cooking Anti-Lock:
   
     –While a recipe is open, the application will prevent the device from locking/sleeping to ensure an uninterrupted cooking experience.
-
-
-OpenAI API KEY:
-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
+    
