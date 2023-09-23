@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Recipe Generator Application</string>
+    <string name = "main_greeting">Let\'s Find a Recipe!</string>
+    <string name="by_name">Search by Name</string>
+    <string name="by_ingredients">Search by Ingredients</string>
+    <string name="saved_recipe">Saved Recipes</string>
+    <string name="recipe_history">Recipe History</string>
+    <string name="tip_of_the_day">TIP OF THE DAY\nIf your soups and sauces are too watery,\ntry adding a few instant potato flakes \nas a thickener!</string>
 </resources>
