@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         EditText username = (EditText) findViewById(R.id.username);
-        MaterialButton regbtn = (MaterialButton) findViewById(R.id.signup_button);
+        MaterialButton regbtn = (MaterialButton) findViewById(R.id.register_button);
 
         regbtn.setOnClickListener(new View.OnClickListener() {
             @Override

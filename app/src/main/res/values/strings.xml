@@ -6,4 +6,6 @@
     <string name="saved_recipe">Saved Recipes</string>
     <string name="recipe_history">Recipe History</string>
     <string name="tip_of_the_day">TIP OF THE DAY\nIf your soups and sauces are too watery,\ntry adding a few instant potato flakes \nas a thickener!</string>
+    <string name="login_title">Login</string>
+    <string name="register_button">REGISTER</string>
 </resources>
