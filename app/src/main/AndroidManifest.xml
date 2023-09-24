@@ -15,6 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipeGeneratorApplication"
         tools:targetApi="31">
+
+        <activity
+            android:name=".MainMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".search_by_name_activity"
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="false"
