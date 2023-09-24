@@ -7,25 +7,26 @@
     android:background="@drawable/food_background_temp"
 
 
-    tools:context=".MainMenuActivity" >
+    tools:context=".MainMenuActivity">
 
     <EditText
-        android:labelFor="@id/main_greeting"
         android:id="@+id/main_greeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
         android:ems="10"
         android:fontFamily="cursive"
         android:inputType="text"
+        android:labelFor="@id/main_greeting"
         android:text="@string/main_greeting"
         android:textAlignment="center"
         android:textSize="38sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.586"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.197" />
 
     <Button
         android:id="@+id/search_by_name"
@@ -56,7 +57,7 @@
         android:id="@+id/saved_recipes"
         android:layout_width="157dp"
         android:layout_height="52dp"
-        android:layout_marginStart="44dp"
+        android:layout_marginStart="4dp"
         android:ems="10"
         android:fontFamily="casual"
         android:inputType="text"
@@ -66,6 +67,8 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.185"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.621" />
@@ -83,7 +86,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.411"
+        app:layout_constraintHorizontal_bias="0.829"
         app:layout_constraintStart_toEndOf="@+id/saved_recipes"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.622" />
@@ -103,8 +106,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintHorizontal_bias="0.733"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.846" />
+        app:layout_constraintVertical_bias="0.867" />
 </androidx.constraintlayout.widget.ConstraintLayout>
