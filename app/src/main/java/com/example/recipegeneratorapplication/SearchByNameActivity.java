@@ -2,6 +2,7 @@ package com.example.recipegeneratorapplication;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -28,6 +29,8 @@ public class SearchByNameActivity extends AppCompatActivity
 
         inputRecipeName = findViewById(R.id.recipe_name_input_box);
 
+        resultList = findViewById(R.id.result_recipe_list);
+
         button = findViewById(R.id.search_name_button);
 
         //when search button is clicked the method search_recipes_by_name is called
@@ -42,6 +45,13 @@ public class SearchByNameActivity extends AppCompatActivity
     {
 
         Log.d("message", "Have a great day!");
+
+        String arrList[] = {"lasagna","hamburger","casserole"};
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, arrList);
+
+        resultList.setAdapter(adapter);
 
 
     }
