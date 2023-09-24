@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "407680104371",
+    "project_id": "recipegen-3d1d1",
+    "storage_bucket": "recipegen-3d1d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407680104371:android:9b512b7f206d835a407dc6",
+        "android_client_info": {
+          "package_name": "com.example.recipegeneratorapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVm_dG8J1Ms6s50pNgdTfbkfCY0xw8FeM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
