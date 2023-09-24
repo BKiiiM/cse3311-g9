@@ -101,7 +101,7 @@
         android:inputType="textMultiLine"
         android:text="@string/tip_of_the_day"
         android:textAlignment="center"
-        android:textColor="@color/Dark_Blue"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
