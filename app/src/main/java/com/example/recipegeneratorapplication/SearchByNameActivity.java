@@ -2,6 +2,7 @@ package com.example.recipegeneratorapplication;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +40,16 @@ public class SearchByNameActivity extends AppCompatActivity
 
         button.setOnClickListener(this::searchRecipesByName);
 
+        //add event to click on list item
+
+        resultList.setOnItemClickListener(this::onItemClick);
+
+    }
+
+    //this method will be called when user clicks on an item in the list
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+
     }
 
     public void searchRecipesByName(View v)
@@ -46,7 +57,11 @@ public class SearchByNameActivity extends AppCompatActivity
 
         Log.d("message", "Have a great day!");
 
-        String arrList[] = {"lasagna","hamburger","casserole"};
+        String inputText = inputRecipeName.getText().toString();
+
+        //call method that calls the API here
+
+        String arrList[] = {inputText,"lasagna","hamburger","casserole"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, arrList);
@@ -56,5 +71,5 @@ public class SearchByNameActivity extends AppCompatActivity
 
     }
 
-    //
+    //add method that calls the API here
 }
