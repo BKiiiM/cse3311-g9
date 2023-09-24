@@ -4,14 +4,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class search_by_name_activity extends AppCompatActivity
+public class SearchByNameActivity extends AppCompatActivity
 {
-    EditText input_recipe_name;
+    EditText inputRecipeName;
+
+    ListView resultList;
 
     Button button;
 
@@ -24,7 +26,7 @@ public class search_by_name_activity extends AppCompatActivity
 
         //create a reference to input text box for recipe name
 
-        input_recipe_name = findViewById(R.id.recipe_name_input_box);
+        inputRecipeName = findViewById(R.id.recipe_name_input_box);
 
         button = findViewById(R.id.search_name_button);
 
@@ -32,11 +34,11 @@ public class search_by_name_activity extends AppCompatActivity
         //use this if onClick is not used and we want to set our buttons dynamically,
         //both methods are equivalent
 
-        button.setOnClickListener(this::search_recipes_by_name);
+        button.setOnClickListener(this::searchRecipesByName);
 
     }
 
-    public void search_recipes_by_name(View v)
+    public void searchRecipesByName(View v)
     {
 
         Log.d("message", "Have a great day!");

@@ -5,14 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.widget.Button;
-
-import com.google.android.material.button.MaterialButton;
 
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -32,7 +26,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
     private void next_screen(View view)
     {
-        Intent myIntent = new Intent(MainMenuActivity.this, search_by_name_activity.class);
+        Intent myIntent = new Intent(MainMenuActivity.this, SearchByNameActivity.class);
         MainMenuActivity.this.startActivity(myIntent);
     }
 

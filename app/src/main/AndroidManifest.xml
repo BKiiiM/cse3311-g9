@@ -20,7 +20,7 @@
             android:name=".MainMenuActivity"
             android:exported="false" />
         <activity
-            android:name=".search_by_name_activity"
+            android:name=".SearchByNameActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
