@@ -1,6 +1,7 @@
 package com.example.recipegeneratorapplication;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
 
@@ -13,5 +14,11 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
+    }
+
+    @Test
+    public void isTrue() {
+        int x = 0;
+        assertTrue(x == 0);
     }
 }
