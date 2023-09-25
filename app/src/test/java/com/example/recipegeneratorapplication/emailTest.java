@@ -9,9 +9,6 @@ public class emailTest {
     @Test
     public void emailTesting() {
         // Using Reg Ex, tokenize a string to fit the format _____@_____.com
-        //LoginResult LR = new LoginResult();
-
-        //String input = LR.getEmail();
         String input = "test@test.com";
         String regex = "^(\\w+)@(\\w+)\\.com$";
         Pattern pattern = Pattern.compile(regex);
