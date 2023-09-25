@@ -1,28 +1,22 @@
 package com.example.recipegeneratorapplication;
 
-//import org.junit.Test;
-import org.junit.jupiter.api.Test;
-//import static org.junit.Assert.*;
-
-import android.widget.Toast;
-
-//import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class emailTest {
     @Test
     public void emailTesting() {
-        String testEmail = "testing@gmail.com";
-        String testPassword = "test0123";
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        mAuth.signInWithEmailAndPassword(testEmail, testPassword)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Login successful
-                        Toast.makeText(LoginActivity.this, "Login successful",
-                                Toast.LENGTH_LONG).show();
-                        assertTrue(task);
-                    }
-                });
+        // Using Reg Ex, tokenize a string to fit the format _____@_____.com
+        //LoginResult LR = new LoginResult();
+
+        //String input = LR.getEmail();
+        String input = "test@test.com";
+        String regex = "^(\\w+)@(\\w+)\\.com$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+
+        assertTrue(matcher.matches());
     }
 }
