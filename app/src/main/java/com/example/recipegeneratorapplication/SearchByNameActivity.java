@@ -1,5 +1,6 @@
 package com.example.recipegeneratorapplication;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.AdapterView;
@@ -41,12 +42,27 @@ public class SearchByNameActivity extends AppCompatActivity
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipeList);
         resultList.setAdapter(adapter);
 
+        resultList.setOnItemClickListener(this::onItemClick);
+
         searchButton.setOnClickListener(v -> {
             String query = inputRecipeName.getText().toString().trim();
             if (!query.isEmpty()) {
                 new recipeSearchByName().execute(query);
             }
         });
+    }
+
+    //we need to know the index of the recipe selected by the user
+    //to extract information from the recipe
+    private void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+    {
+        RecipeSummary recipeData = recipeList.get(i);
+        int recipeId = recipeData.getId();
+
+        Intent myIntent = new Intent(SearchByNameActivity.this, DisplayRecipeSelected.class);
+        myIntent.putExtra("id", recipeId);
+        SearchByNameActivity.this.startActivity(myIntent);
+
     }
 
 
