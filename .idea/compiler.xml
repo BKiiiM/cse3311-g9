@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="17">
+      <module name="Recipe Generator Application.Recipe_Generator_Application.app" target="11" />
       <module name="Recipe_Generator_Application.java_lib" target="1.7" />
       <module name="Recipe_Generator_Application.java_lib.main" target="1.7" />
       <module name="Recipe_Generator_Application.java_lib.test" target="1.7" />

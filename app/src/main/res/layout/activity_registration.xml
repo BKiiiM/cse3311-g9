@@ -93,13 +93,52 @@
         android:textColorHint="@color/white" />
 
     <LinearLayout
+        android:id="@+id/dietary_preferences_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/confirm_password"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        >
+
+        <CheckBox
+            android:id="@+id/checkbox_vegetarian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vegetarian"
+            android:textColor="@color/white"
+            />
+
+        <CheckBox
+            android:id="@+id/checkbox_vegan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vegan"
+            android:textColor="@color/white"
+            android:layout_marginStart="20dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_gluten_free"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gluten-Free"
+            android:textColor="@color/white"
+            android:layout_marginStart="20dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@id/confirm_password"
+        android:layout_below="@id/dietary_preferences_layout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:gravity="center">
+
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/signup_button"

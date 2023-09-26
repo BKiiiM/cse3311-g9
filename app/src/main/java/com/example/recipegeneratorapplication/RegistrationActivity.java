@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.SQLOutput;
 import java.util.HashMap;
@@ -99,6 +102,15 @@ public class RegistrationActivity extends AppCompatActivity {
             //TODO: fix the break
             return;
         }
+
+        User user = new User();
+        user.setEmail(emailEdit.getText().toString());
+        user.setUsername(usernameEdit.getText().toString());
+        user.setPassword(passwordEdit.getText().toString());
+        user.setVegetarian(((CheckBox) findViewById(R.id.checkbox_vegetarian)).isChecked());
+        user.setVegan(((CheckBox) findViewById(R.id.checkbox_vegan)).isChecked());
+        user.setGlutenFree(((CheckBox) findViewById(R.id.checkbox_gluten_free)).isChecked());
+
         HashMap<String, String> map = new HashMap<>();
 
         map.put("email", emailEdit.getText().toString());
@@ -110,6 +122,12 @@ public class RegistrationActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Registration successful
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference usersRef = database.getReference("users");
+                        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        usersRef.child(userId).setValue(user);
+
+
                         Toast.makeText(RegistrationActivity.this,
                                 "Signed up successfully", Toast.LENGTH_LONG).show();
                     } else {
