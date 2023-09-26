@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Login successful",
                                 Toast.LENGTH_LONG).show();
                         // You can navigate to another activity here
-
                         next_screen();
 
                     } else {
