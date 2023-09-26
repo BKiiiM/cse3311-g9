@@ -1,7 +1,5 @@
 package com.example.recipegeneratorapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,55 +10,45 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.button.MaterialButton;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.sql.SQLOutput;
 import java.util.HashMap;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private Retrofit retrofit;
-    private RetrofitInterface retrofitInterface;
-    private String BASE_URL ="http://10.0.2.2:3000/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Initialize Firebase
         FirebaseApp.initializeApp(this);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create()).build();
-        retrofitInterface = retrofit.create(RetrofitInterface.class);
 
-
-        // Find the "Already have an account? Log in" TextView
+        // Find UI elements
         TextView alreadyHaveAccountText = findViewById(R.id.AlreadyHaveAccount);
         Button registerButton = findViewById(R.id.signup_button);
-
         EditText usernameEditText = findViewById(R.id.username);
         EditText emailEditText = findViewById(R.id.email);
         EditText passwordEditText = findViewById(R.id.password);
         EditText confirmPasswordEditText = findViewById(R.id.confirm_password);
+
+        // Register button click listener
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Get user input
                 String username = usernameEditText.getText().toString();
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 String confirmPassword = confirmPasswordEditText.getText().toString();
 
+                // Log user input for debugging
                 Log.d("RegistrationActivity", "Username: " + username);
                 Log.d("RegistrationActivity", "Email: " + email);
                 Log.d("RegistrationActivity", "Password: " + password);
@@ -68,14 +56,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 Toast.makeText(RegistrationActivity.this, "Register button clicked", Toast.LENGTH_SHORT).show();
 
-                System.out.println(username + email + password + confirmPassword);
-
+                // Call the method to handle user registration
                 handleSignupDialog();
             }
         });
 
+        // Already have an account text click listener
         alreadyHaveAccountText.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 // Create an Intent to navigate to the LoginActivity
@@ -88,21 +75,21 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void handleSignupDialog() {
-
-
+        // Find UI elements
         EditText emailEdit = findViewById(R.id.email);
         EditText usernameEdit = findViewById(R.id.username);
         EditText passwordEdit = findViewById(R.id.password);
         EditText confirmPassEdit = findViewById(R.id.confirm_password);
 
-        if(!(confirmPassEdit.getText().toString().equals(passwordEdit.getText().toString())))
-        {
+        // Check if passwords match
+        if (!(confirmPassEdit.getText().toString().equals(passwordEdit.getText().toString()))) {
             Toast.makeText(RegistrationActivity.this, "Passwords do not match!", Toast.LENGTH_SHORT).show();
 
-            //TODO: fix the break
+            // TODO: Fix the break (consider explaining what needs fixing)
             return;
         }
 
+        // Create a User object and populate it
         User user = new User();
         user.setEmail(emailEdit.getText().toString());
         user.setUsername(usernameEdit.getText().toString());
@@ -111,12 +98,13 @@ public class RegistrationActivity extends AppCompatActivity {
         user.setVegan(((CheckBox) findViewById(R.id.checkbox_vegan)).isChecked());
         user.setGlutenFree(((CheckBox) findViewById(R.id.checkbox_gluten_free)).isChecked());
 
+        // Create a HashMap to store user data
         HashMap<String, String> map = new HashMap<>();
-
         map.put("email", emailEdit.getText().toString());
         map.put("username", usernameEdit.getText().toString());
         map.put("password", passwordEdit.getText().toString());
 
+        // Initialize Firebase Authentication
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(emailEdit.getText().toString(), passwordEdit.getText().toString())
                 .addOnCompleteListener(this, task -> {
@@ -127,22 +115,22 @@ public class RegistrationActivity extends AppCompatActivity {
                         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                         usersRef.child(userId).setValue(user);
 
-
+                        // Show a success toast message
                         Toast.makeText(RegistrationActivity.this,
                                 "Signed up successfully", Toast.LENGTH_LONG).show();
                     } else {
                         // Registration failed
                         if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                            // Show a toast message for email already registered
                             Toast.makeText(RegistrationActivity.this,
                                     "Email address already registered", Toast.LENGTH_LONG).show();
                         } else {
+                            // Show a toast message for registration failure with error details
                             Toast.makeText(RegistrationActivity.this,
                                     "Registration failed: " + task.getException().getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-
     }
-
 }
