@@ -25,8 +25,8 @@ public class SearchByNameActivity extends AppCompatActivity
     EditText inputRecipeName;
     Button searchButton;
     ListView resultList;
-    ArrayAdapter<String> adapter;
-    ArrayList<String> recipeList = new ArrayList<>();
+    ArrayAdapter<RecipeSummary> adapter;
+    ArrayList<RecipeSummary> recipeList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -49,25 +49,30 @@ public class SearchByNameActivity extends AppCompatActivity
         });
     }
 
-    private class recipeSearchByName extends AsyncTask<String, Void, ArrayList<String>> {
+
+    private class recipeSearchByName extends AsyncTask<String, Void, ArrayList<RecipeSummary>> {
         @Override
-        protected ArrayList<String> doInBackground(String... params) {
+        protected ArrayList<RecipeSummary> doInBackground(String... params) {
             String query = params[0];
-            ArrayList<String> result = new ArrayList<>();
+            ArrayList<RecipeSummary> result = new ArrayList<>();
 
             try {
+                //creates string with entire url to search in the browser
                 String spoonacularUrl = "https://api.spoonacular.com/recipes/complexSearch" +
                         "?apiKey=" + API_KEY +
                         "&query=" + query +
-                        "&number=5"; //we can change this number
+                        "&number=10"; //we can change this number
 
                 URL url = new URL(spoonacularUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
 
+
+                //asks for response from url
                 int responseCode = connection.getResponseCode();
 
                 if (responseCode == HttpURLConnection.HTTP_OK) {
+
                     BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     StringBuilder response = new StringBuilder();
                     String line;
@@ -82,7 +87,11 @@ public class SearchByNameActivity extends AppCompatActivity
                     for (int i = 0; i < results.length(); i++) {
                         JSONObject recipe = results.getJSONObject(i);
                         String recipeName = recipe.getString("title");
-                        result.add(recipeName);
+                        int id = recipe.getInt("id");
+                        RecipeSummary recipeData = new RecipeSummary();
+                        recipeData.setId(id);
+                        recipeData.setTitle(recipeName);
+                        result.add(recipeData);
                     }
                 }
                 connection.disconnect();
@@ -94,7 +103,7 @@ public class SearchByNameActivity extends AppCompatActivity
         }
 
         @Override
-        protected void onPostExecute(ArrayList<String> result) {
+        protected void onPostExecute(ArrayList<RecipeSummary> result) {
             super.onPostExecute(result);
             recipeList.clear();
             recipeList.addAll(result);
