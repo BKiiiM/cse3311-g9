@@ -54,7 +54,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 Log.d("RegistrationActivity", "Password: " + password);
                 Log.d("RegistrationActivity", "Confirm Password: " + confirmPassword);
 
-                // Show a toast message
                 Toast.makeText(RegistrationActivity.this, "Register button clicked", Toast.LENGTH_SHORT).show();
 
                 // Call the method to handle user registration
