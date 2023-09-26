@@ -82,8 +82,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 });
-
-
     }
     //This method navigates to the main menu screen after login is successful
     private void next_screen()
