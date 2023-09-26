@@ -17,4 +17,5 @@
     <string name="search_name">Search</string>
     <string name="recipe_autofill">recipe</string>
     <string name="input_ingredients_message">Enter Ingredients</string>
+    <string name="hint_user_input_recipe_name">recipe name</string>
 </resources>
