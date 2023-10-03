@@ -4,42 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/food_background_temp"
+    android:background="@drawable/temp_background_main_menu"
     tools:context=".DisplayRecipeSelected">
 
     <TextView
         android:id="@+id/recipe_API_id"
         android:layout_width="281dp"
         android:layout_height="51dp"
-        android:text="TextView"
+        android:text="@string/selected_recipe_id"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.383"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="403dp"
+        android:layout_height="624dp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.242" />
+        app:layout_constraintVertical_bias="0.85">
 
-    <TextView
-        android:id="@+id/recipeTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.458"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.453" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
 
-    <ImageView
-        android:id="@+id/recipe_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipeTitle"
-        tools:srcCompat="@tools:sample/avatars" />
+            <TextView
+                android:id="@+id/recipe_title"
+                android:text="@string/selected_recipe_title"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="cursive"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                tools:text="Recipe Name" />
+
+            <ImageView
+                android:id="@+id/recipe_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:contentDescription="@string/selected_recipe_photo"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/selected_recipe_ingredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="15"
+                android:singleLine="false"
+                android:text=""
+                android:textColor="@color/black"
+                app:autoSizeTextType="none"
+                tools:text="ingredient\nlist\nnumberOne\nnumberTwo" />
+
+            <TextView
+                android:id="@+id/selected_recipe_instructions"
+                android:layout_width="match_parent"
+                android:layout_height="315dp"
+                android:text="@string/selected_recipe_instructions"
+                android:textColor="@color/black"
+                app:autoSizeTextType="none" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

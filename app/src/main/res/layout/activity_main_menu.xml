@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/food_background_temp"
+    android:background="@drawable/temp_background_main_menu"
 
 
     tools:context=".MainMenuActivity">

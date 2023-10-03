@@ -78,7 +78,7 @@ public class SearchByNameActivity extends AppCompatActivity
                 String spoonacularUrl = "https://api.spoonacular.com/recipes/complexSearch" +
                         "?apiKey=" + API_KEY +
                         "&query=" + query +
-                        "&number=10"; //we can change this number
+                        "&number=20"; //we can change this number
 
                 URL url = new URL(spoonacularUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/food_background_temp"
+    android:background="@drawable/temp_background_main_menu"
     tools:context=".SearchByNameActivity">
 
     <EditText
@@ -30,12 +30,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:fontFamily="cursive"
         android:inputType="text"
         android:minHeight="48dp"
         android:text="@string/recipe_name_message"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="22sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/recipe_name_input_box"
         app:layout_constraintEnd_toEndOf="parent"
