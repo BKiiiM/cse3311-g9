@@ -69,7 +69,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
             {
                 e.printStackTrace();
             }
-
+            // contains all the recipe information
             return jsonObject;
         }
 
@@ -84,7 +84,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
                 selectedRecipeTitle.setText(result.getString("title"));
                 displayIngredients(result);
                 displayInstructions(result);
-                //Picasso extracts the recipe photo contained in tje Json object result
+                //Picasso extracts the recipe photo contained in the field "image"
                 // and displays it on the screen using the ImageView widget
                 Picasso.get().load(result.getString("image")).into(selectedRecipePhoto);
 
@@ -99,6 +99,11 @@ public class DisplayRecipeSelected extends AppCompatActivity
     private void displayInstructions(JSONObject result) throws JSONException
     {
 
+        // On Spoonacular "analyzedInstructions" contains an array of objects, we're interested in
+        // the first object at index 0
+        // this first object contains another array of objects called "steps"
+        // we're interested in extracting the field "step" from the array "steps"
+        // This field contains the recipe instructions for the recipe clicked on by the user
         JSONArray recipeInstructions = result.getJSONArray("analyzedInstructions");
         JSONObject analyzedInstructions = recipeInstructions.getJSONObject(0);
         JSONArray stepsArray = analyzedInstructions.getJSONArray("steps");
@@ -108,16 +113,21 @@ public class DisplayRecipeSelected extends AppCompatActivity
         for (int i = 0; i < stepsArray.length(); i++)
         {
             JSONObject step = stepsArray.getJSONObject(i);
+            // we also access the field "number" to extract the number of the step to follow
+            // so we can organize our screen output better
             recipe_number = step.getInt("number");
             recipe_step = step.getString("step");
             recipe_all_steps = recipe_all_steps+"Step "+recipe_number+")"+recipe_step+"\n\n";
 
         }
+        // output the recipe step number and instructions to screen
         selectedRecipeInstructions.setText(recipe_all_steps);
     }
 
     private void displayIngredients(JSONObject result) throws JSONException
     {
+        // get array of objects extendedIngredients so we can access the field "original"
+        // "original" contains each ingredient needed for the recipe
         JSONArray extendedIngredientsArr = result.getJSONArray("extendedIngredients");
         String selectedIngredients = "";
         String allSelectedIngredients = "";
@@ -128,6 +138,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
             allSelectedIngredients = allSelectedIngredients+selectedIngredients+"\n";
 
         }
+        // display the ingredients from the selected recipe on the screen
         selectedRecipeIngredients.setText(allSelectedIngredients);
     }
 
@@ -145,9 +156,9 @@ public class DisplayRecipeSelected extends AppCompatActivity
         selectedRecipeIngredients = findViewById(R.id.selected_recipe_ingredients);
         selectedRecipeInstructions = findViewById(R.id.selected_recipe_instructions);
 
-        //displays the recipe id on screen
-        selectedRecipeId.setText(id+"");
-        selectedRecipeIngredients.setText("");
+        //displays the recipe id on screen just to test the function
+        // selectedRecipeId.setText(id+"");
+        // selectedRecipeIngredients.setText("");
         new recipeSearchById().execute(id);
     }
 

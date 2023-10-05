@@ -26,7 +26,7 @@ public class SearchByNameActivity extends AppCompatActivity
     private static final String API_KEY = "7bc4cc04deb34da4b63e486dd734ca93";
     EditText inputRecipeName;
     Button searchButton;
-    ListView resultList;
+    ListView resultListByName;
     ArrayAdapter<RecipeSummary> adapter;
     ArrayList<RecipeSummary> recipeList = new ArrayList<>();
 
@@ -39,15 +39,16 @@ public class SearchByNameActivity extends AppCompatActivity
         //create references to input text box, button and list view
         inputRecipeName = findViewById(R.id.recipe_name_input_box);
         searchButton = findViewById(R.id.search_name_button);
-        resultList = findViewById(R.id.result_recipe_list);
+        resultListByName = findViewById(R.id.result_recipe_list);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipeList);
-        resultList.setAdapter(adapter);
+        resultListByName.setAdapter(adapter);
 
-        resultList.setOnItemClickListener(this::onItemClick);
+        resultListByName.setOnItemClickListener(this::onItemClick);
 
         searchButton.setOnClickListener(v -> {
             String query = inputRecipeName.getText().toString().trim();
-            if (!query.isEmpty()) {
+            if (!query.isEmpty())
+            {
                 new recipeSearchByName().execute(query);
             }
         });
@@ -74,7 +75,7 @@ public class SearchByNameActivity extends AppCompatActivity
             ArrayList<RecipeSummary> result = new ArrayList<>();
 
             try {
-                //creates string with entire url to search in the browser
+                //creates string with entire url to search using HttpURLConnection
                 String spoonacularUrl = "https://api.spoonacular.com/recipes/complexSearch" +
                         "?apiKey=" + API_KEY +
                         "&query=" + query +

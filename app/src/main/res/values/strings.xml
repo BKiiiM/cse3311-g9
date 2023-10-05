@@ -24,4 +24,9 @@
     <string name="selected_recipe_instructions" />
     <string name="selected_recipe_photo" />
     <string name="selected_recipe_ingredients" />
+    <string name="recipe_ingredients_input_box" />
+    <string name="recipe_ingredients_message" />
+    <string name="ingredients_input_box_hint">eggs,flour,sugar</string>
+    <string name="enter_ingredients_message">Enter Ingredients</string>
+    <string name="button_search_ingredients">SEARCH</string>
 </resources>
