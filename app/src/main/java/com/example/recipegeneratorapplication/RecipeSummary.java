@@ -1,6 +1,6 @@
 package com.example.recipegeneratorapplication;
 //created class RecipeSummary that will contain all the fields we need
-// from Spoonacular recipes to generated the searched and selected recipe
+// from Spoonacular to generate the searched and selected recipe
 
 public class RecipeSummary
 {

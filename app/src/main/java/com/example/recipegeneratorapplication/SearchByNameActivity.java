@@ -40,12 +40,16 @@ public class SearchByNameActivity extends AppCompatActivity
         inputRecipeName = findViewById(R.id.recipe_name_input_box);
         searchButton = findViewById(R.id.search_name_button);
         resultListByName = findViewById(R.id.result_recipe_list);
+
+        //We need an array adapter to convert the ArrayList of objects (recipeList) into View items
+        // that will be loaded into the ListView container.
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipeList);
         resultListByName.setAdapter(adapter);
 
         resultListByName.setOnItemClickListener(this::onItemClick);
 
-        searchButton.setOnClickListener(v -> {
+        searchButton.setOnClickListener(v ->
+        {
             String query = inputRecipeName.getText().toString().trim();
             if (!query.isEmpty())
             {
@@ -68,9 +72,11 @@ public class SearchByNameActivity extends AppCompatActivity
     }
 
 
-    private class recipeSearchByName extends AsyncTask<String, Void, ArrayList<RecipeSummary>> {
+    private class recipeSearchByName extends AsyncTask<String, Void, ArrayList<RecipeSummary>>
+    {
         @Override
-        protected ArrayList<RecipeSummary> doInBackground(String... params) {
+        protected ArrayList<RecipeSummary> doInBackground(String... params)
+        {
             String query = params[0];
             ArrayList<RecipeSummary> result = new ArrayList<>();
 
@@ -79,7 +85,7 @@ public class SearchByNameActivity extends AppCompatActivity
                 String spoonacularUrl = "https://api.spoonacular.com/recipes/complexSearch" +
                         "?apiKey=" + API_KEY +
                         "&query=" + query +
-                        "&number=20"; //we can change this number
+                        "&number=30"; //we can change this number
 
                 URL url = new URL(spoonacularUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -89,12 +95,14 @@ public class SearchByNameActivity extends AppCompatActivity
                 //asks for response from url
                 int responseCode = connection.getResponseCode();
 
-                if (responseCode == HttpURLConnection.HTTP_OK) {
+                if (responseCode == HttpURLConnection.HTTP_OK)
+                {
 
                     BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     StringBuilder response = new StringBuilder();
                     String line;
-                    while ((line = reader.readLine()) != null) {
+                    while ((line = reader.readLine()) != null)
+                    {
                         response.append(line);
                     }
                     reader.close();
@@ -102,7 +110,8 @@ public class SearchByNameActivity extends AppCompatActivity
                     JSONObject jsonObject = new JSONObject(response.toString());
                     JSONArray results = jsonObject.getJSONArray("results");
 
-                    for (int i = 0; i < results.length(); i++) {
+                    for (int i = 0; i < results.length(); i++)
+                    {
                         JSONObject recipe = results.getJSONObject(i);
                         String recipeName = recipe.getString("title");
                         int id = recipe.getInt("id");
@@ -113,7 +122,9 @@ public class SearchByNameActivity extends AppCompatActivity
                     }
                 }
                 connection.disconnect();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 e.printStackTrace();
             }
 
@@ -121,7 +132,8 @@ public class SearchByNameActivity extends AppCompatActivity
         }
 
         @Override
-        protected void onPostExecute(ArrayList<RecipeSummary> result) {
+        protected void onPostExecute(ArrayList<RecipeSummary> result)
+        {
             super.onPostExecute(result);
             recipeList.clear();
             recipeList.addAll(result);
