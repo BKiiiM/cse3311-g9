@@ -55,7 +55,7 @@
 
             <ImageView
                 android:id="@+id/recipe_photo"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:contentDescription="@string/selected_recipe_photo"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -67,6 +67,10 @@
                 android:fontFamily="casual"
                 android:maxLines="80"
                 android:singleLine="false"
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="8dp"
                 android:text=""
                 android:textColor="@color/black"
                 android:textSize="16sp"
