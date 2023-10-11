@@ -116,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
 
             try {
                 task.getResult(ApiException.class);
+                next_screen();
             } catch (ApiException e){
                 Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
             }
