@@ -19,6 +19,6 @@ public class ExampleUnitTest {
     @Test
     public void isTrue() {
         int x = 0;
-        assertTrue(x == 0);
+        assertEquals(0, x);
     }
 }

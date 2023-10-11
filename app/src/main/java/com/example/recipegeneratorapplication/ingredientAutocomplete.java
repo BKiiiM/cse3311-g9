@@ -19,9 +19,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import com.example.recipegeneratorapplication.BuildConfig;
+
 public class ingredientAutocomplete extends AppCompatActivity {
 
-    private static final String API_KEY = "7bc4cc04deb34da4b63e486dd734ca93";
+    private static final String API_KEY = BuildConfig.SPOONACULAR_API_KEY;
     private EditText autocompleteSearchQueryEditText;
     private ListView autocompleteSearchResultsListView;
     private ArrayAdapter<String> adapter;

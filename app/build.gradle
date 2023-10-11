@@ -19,6 +19,9 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        buildConfigField("String", "SPOONACULAR_API_KEY", SPOONACULAR_API_KEY)
+
     }
 
     buildTypes {
