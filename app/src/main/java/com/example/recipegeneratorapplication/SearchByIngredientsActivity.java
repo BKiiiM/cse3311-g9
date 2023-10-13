@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class SearchByIngredientsActivity extends AppCompatActivity
 {
-    private static final String API_KEY = "7bc4cc04deb34da4b63e486dd734ca93";
+    private static final String API_KEY = BuildConfig.SPOONACULAR_API_KEY;
     EditText inputRecipeIngredients;
     Button searchByIngredientButton;
     ListView resultListByIngredients;

@@ -19,7 +19,6 @@
         android:layout_height="48dp"
         android:ems="10"
         android:fontFamily="cursive"
-        android:inputType="text"
         android:labelFor="@id/main_greeting"
         android:text="@string/main_greeting"
         android:textAlignment="center"
@@ -59,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/saved_recipes"
         android:layout_width="181dp"
         android:layout_height="64dp"
@@ -67,7 +66,6 @@
         android:backgroundTint="@color/purple_500"
         android:ems="10"
         android:fontFamily="casual"
-        android:inputType="text"
         android:text="@string/saved_recipe"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -80,7 +78,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.583" />
 
-    <EditText
+    <TextView
         android:id="@+id/recipe_history"
         android:layout_width="181dp"
         android:layout_height="64dp"
@@ -88,7 +86,6 @@
         android:backgroundTint="@color/purple_500"
         android:ems="10"
         android:fontFamily="casual"
-        android:inputType="text"
         android:text="@string/recipe_history"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -101,7 +98,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.583" />
 
-    <EditText
+    <TextView
         android:id="@+id/tip_of_the_day"
         android:layout_width="263dp"
         android:layout_height="198dp"
@@ -109,7 +106,6 @@
         android:ems="10"
         android:fontFamily="serif-monospace"
         android:gravity="center_horizontal"
-        android:inputType="textMultiLine"
         android:text="@string/tip_of_the_day"
         android:textAlignment="center"
         android:textColor="@color/black"
