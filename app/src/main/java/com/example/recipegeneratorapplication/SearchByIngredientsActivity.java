@@ -82,7 +82,7 @@ public class SearchByIngredientsActivity extends AppCompatActivity
 
                 //creates string with entire url to search using HttpURLConnection
                 String spoonacularUrl = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=" + API_KEY +
-                        "&ingredients=" + ingredientInput+"&number=10";
+                        "&ingredients=" + ingredientInput+"&number=30";
 
                 URL url = new URL(spoonacularUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
