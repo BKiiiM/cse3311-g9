@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/temp_background_main_menu"
+    android:background="@color/white"
     tools:context=".DisplayRecipeSelected">
 
     <TextView
         android:id="@+id/recipe_API_id"
-        android:layout_width="281dp"
-        android:layout_height="51dp"
+        android:layout_width="268dp"
+        android:layout_height="26dp"
         android:text="@string/selected_recipe_id"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,22 +20,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="403dp"
-        android:layout_height="624dp"
+        android:layout_width="402dp"
+        android:layout_height="714dp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85">
+        app:layout_constraintVertical_bias="0.373">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/recipe_title"
@@ -44,6 +45,10 @@
                 android:ellipsize="marquee"
                 android:fontFamily="cursive"
                 android:marqueeRepeatLimit="marquee_forever"
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="8dp"
                 android:scrollHorizontally="true"
                 android:singleLine="false"
                 android:text="@string/selected_recipe_title"
@@ -61,16 +66,33 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
+                android:id="@+id/ingredient_title"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="cursive"
+                android:maxLines="80"
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="8dp"
+                android:singleLine="false"
+                android:text="@string/ingredientTitle"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:autoSizeTextType="none" />
+
+            <TextView
                 android:id="@+id/selected_recipe_ingredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="casual"
                 android:maxLines="80"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="10dp"
                 android:singleLine="false"
-                android:paddingLeft="8dp"
-                android:paddingTop="8dp"
-                android:paddingRight="8dp"
-                android:paddingBottom="8dp"
                 android:text=""
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -79,20 +101,36 @@
                 tools:text="ingredient list" />
 
             <TextView
-                android:id="@+id/selected_recipe_instructions"
+                android:id="@+id/preparation_title"
                 android:layout_width="360dp"
-                android:layout_height="304dp"
-                android:fontFamily="casual"
+                android:layout_height="wrap_content"
+                android:fontFamily="cursive"
                 android:paddingLeft="8dp"
                 android:paddingTop="8dp"
                 android:paddingRight="8dp"
                 android:paddingBottom="8dp"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:autoSizeTextType="none"
+                android:text="@string/preparationTitle" />
+
+            <TextView
+                android:id="@+id/selected_recipe_instructions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:paddingLeft="12dp"
+                android:paddingTop="10dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="10dp"
                 android:text="@string/selected_recipe_instructions"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:autoSizeTextType="none"
                 tools:text="recipe instructions" />
+
         </LinearLayout>
     </ScrollView>
 

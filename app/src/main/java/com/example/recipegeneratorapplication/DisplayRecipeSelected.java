@@ -117,7 +117,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
             // so we can organize our screen output better
             recipe_number = step.getInt("number");
             recipe_step = step.getString("step");
-            recipe_all_steps = recipe_all_steps+"Step"+recipe_number+") "+recipe_step+"\n\n";
+            recipe_all_steps = recipe_all_steps+"Step "+recipe_number+") "+recipe_step+"\n\n";
 
         }
         // output the recipe step number and instructions to screen

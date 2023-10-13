@@ -4,13 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/temp_background_main_menu"
+    android:background="@color/white"
     tools:context=".SearchByNameActivity">
+
 
     <TextView
         android:id="@+id/enter_recipe_name_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        android:backgroundTint="@color/purple_200"
         android:ems="10"
         android:fontFamily="cursive"
         android:minHeight="48dp"
@@ -21,11 +27,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/recipe_name_input_box"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.455" />
-
+        app:layout_constraintVertical_bias="0.622" />
 
     <EditText
         android:id="@+id/recipe_name_input_box"
@@ -64,6 +69,7 @@
         android:layout_width="347dp"
         android:layout_height="293dp"
         android:background="@color/cardview_light_background"
+        android:foregroundTint="@color/PrimaryDark"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -29,4 +29,6 @@
     <string name="ingredients_input_box_hint">eggs,flour,sugar</string>
     <string name="enter_ingredients_message">Enter Ingredients</string>
     <string name="button_search_ingredients">SEARCH</string>
+    <string name="ingredientTitle">Ingredients</string>
+    <string name="preparationTitle">Preparation</string>
 </resources>

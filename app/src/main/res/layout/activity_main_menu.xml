@@ -8,7 +8,7 @@
 
     android:orientation="vertical"
 
-    android:background="@drawable/temp_background_main_menu"
+    android:background="@color/white"
 
 
     tools:context=".MainMenuActivity">
