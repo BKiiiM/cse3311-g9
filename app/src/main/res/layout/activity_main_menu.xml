@@ -40,14 +40,14 @@
         android:text="@string/by_name"
         android:textAlignment="center"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/recipe_ingredients_input"
+        app:layout_constraintBottom_toTopOf="@+id/ingredient_1_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_greeting" />
 
     <Button
-        android:id="@+id/recipe_ingredients_input"
+        android:id="@+id/ingredient_1_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="388dp"

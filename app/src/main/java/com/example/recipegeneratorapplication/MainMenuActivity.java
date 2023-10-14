@@ -20,7 +20,7 @@ public class MainMenuActivity extends AppCompatActivity
         setContentView(R.layout.activity_main_menu);
 
         //Initialize buttons using xml ids
-        search_ingredient_button = (Button) findViewById(R.id.recipe_ingredients_input);
+        search_ingredient_button = (Button) findViewById(R.id.ingredient_1_input);
         search_name_button = (Button) findViewById(R.id.search_by_name);
         // Set click listener to navigate to the SearchByNameActivity
         search_name_button.setOnClickListener(this::goToNameSearch);

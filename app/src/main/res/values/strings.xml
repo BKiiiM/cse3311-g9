@@ -31,4 +31,7 @@
     <string name="button_search_ingredients">SEARCH</string>
     <string name="ingredientTitle">Ingredients</string>
     <string name="preparationTitle">Preparation</string>
+    <string name="ingredient1">Ingredient 1</string>
+    <string name="ingredient2">Ingredient 2</string>
+    <string name="ingredient3">Ingredient 3</string>
 </resources>

@@ -24,7 +24,9 @@ import java.util.ArrayList;
 public class SearchByIngredientsActivity extends AppCompatActivity
 {
     private static final String API_KEY = BuildConfig.SPOONACULAR_API_KEY;
-    EditText inputRecipeIngredients;
+    EditText ingredient1;
+    EditText ingredient2;
+    EditText ingredient3;
     Button searchByIngredientButton;
     ListView resultListByIngredients;
     ArrayAdapter<RecipeSummary> adapterView;
@@ -37,7 +39,9 @@ public class SearchByIngredientsActivity extends AppCompatActivity
         setContentView(R.layout.activity_search_by_ingredients);
 
         //create references to input text box, button and list view
-        inputRecipeIngredients =findViewById(R.id.recipe_ingredients_input);
+        ingredient1 =findViewById(R.id.ingredient_1_input);
+        ingredient2 =findViewById(R.id.ingredient_2_input);
+        ingredient3 =findViewById(R.id.ingredient_3_input);
         searchByIngredientButton =findViewById(R.id.search_ingredients);
         resultListByIngredients = findViewById(R.id.result_search_ingredients_ListView);
 
@@ -46,18 +50,23 @@ public class SearchByIngredientsActivity extends AppCompatActivity
 
         resultListByIngredients.setOnItemClickListener(this::onItemClick);
 
-        //setup an OnClickListener to get the user input text
+        //setup an OnClickListener to call the function onButtonClick when the
+        //search button is clicked
         searchByIngredientButton.setOnClickListener(this::onButtonClick);
 
     }
     private void onButtonClick(View view)
     {
-        String query = inputRecipeIngredients.getText().toString().trim();
-        if (!query.isEmpty())
-        {
-            new recipeSearchByIngredients().execute(query);
-        }
+        String query1 = ingredient1.getText().toString().trim();
+        String query2 = ingredient2.getText().toString().trim();
+        String query3 = ingredient3.getText().toString().trim();
 
+        String all_ingredients_query = query1 + ","+ query2 + "," + query3;
+
+        if (!query1.isEmpty() || !query2.isEmpty() || !query3.isEmpty())
+        {
+            new recipeSearchByIngredients().execute(all_ingredients_query);
+        }
     }
     //we need to know the index of the recipe selected by the user
     //to extract information from the recipe
@@ -103,13 +112,11 @@ public class SearchByIngredientsActivity extends AppCompatActivity
                     reader.close();
 
                     JSONArray jsonArray = new JSONArray(response.toString());
-                    int id = 0;
-                    String title = "";
 
                     for (int i = 0; i < jsonArray.length(); i++)
                     {
                         JSONObject recipe = jsonArray.getJSONObject(i);
-                        id = recipe.getInt("id");
+                        int id = recipe.getInt("id");
                         String recipeName = recipe.getString("title");
                         RecipeSummary recipeData = new RecipeSummary();
                         recipeData.setId(id);
