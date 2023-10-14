@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,9 +25,9 @@ import java.util.ArrayList;
 public class SearchByIngredientsActivity extends AppCompatActivity
 {
     private static final String API_KEY = BuildConfig.SPOONACULAR_API_KEY;
-    EditText ingredient1;
-    EditText ingredient2;
-    EditText ingredient3;
+    AutoCompleteTextView ingredient1;
+    AutoCompleteTextView ingredient2;
+    AutoCompleteTextView ingredient3;
     Button searchByIngredientButton;
     ListView resultListByIngredients;
     ArrayAdapter<RecipeSummary> adapterView;

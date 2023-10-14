@@ -26,7 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/ingredient_1_input"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter_ingredients_TextView_message" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/ingredient_2_input"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
@@ -55,7 +55,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingredient_1_input" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/ingredient_3_input"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
@@ -70,8 +70,8 @@
 
     <ListView
         android:id="@+id/result_search_ingredients_ListView"
-        android:layout_width="363dp"
-        android:layout_height="424dp"
+        android:layout_width="365dp"
+        android:layout_height="409dp"
         android:layout_marginTop="10dp"
         android:background="@color/cardview_light_background"
         android:visibility="visible"

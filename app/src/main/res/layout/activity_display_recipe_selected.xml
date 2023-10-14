@@ -26,11 +26,10 @@
         android:layout_width="402dp"
         android:layout_height="714dp"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.373">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,8 +39,9 @@
 
             <TextView
                 android:id="@+id/recipe_title"
-                android:layout_width="wrap_content"
+                android:layout_width="217dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:ellipsize="marquee"
                 android:fontFamily="cursive"
                 android:marqueeRepeatLimit="marquee_forever"
@@ -60,8 +60,9 @@
 
             <ImageView
                 android:id="@+id/recipe_photo"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="300dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="10dp"
                 android:contentDescription="@string/selected_recipe_photo"
                 tools:srcCompat="@tools:sample/avatars" />
 
@@ -69,6 +70,7 @@
                 android:id="@+id/ingredient_title"
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:fontFamily="cursive"
                 android:maxLines="80"
                 android:paddingLeft="8dp"
@@ -86,12 +88,12 @@
                 android:id="@+id/selected_recipe_ingredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:fontFamily="casual"
-                android:maxLines="80"
-                android:paddingLeft="10dp"
+                android:maxLines="100"
+                android:paddingStart="10dp"
                 android:paddingTop="10dp"
-                android:paddingRight="12dp"
-                android:paddingBottom="10dp"
+                android:paddingEnd="10dp"
                 android:singleLine="false"
                 android:text=""
                 android:textColor="@color/black"
@@ -104,21 +106,23 @@
                 android:id="@+id/preparation_title"
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:fontFamily="cursive"
                 android:paddingLeft="8dp"
                 android:paddingTop="8dp"
                 android:paddingRight="8dp"
                 android:paddingBottom="8dp"
+                android:text="@string/preparationTitle"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:autoSizeTextType="none"
-                android:text="@string/preparationTitle" />
+                app:autoSizeTextType="none" />
 
             <TextView
                 android:id="@+id/selected_recipe_instructions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:fontFamily="casual"
                 android:paddingLeft="12dp"
                 android:paddingTop="10dp"
