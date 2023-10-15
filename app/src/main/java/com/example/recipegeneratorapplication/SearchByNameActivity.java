@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class SearchByNameActivity extends AppCompatActivity
 {
     private static final String API_KEY = BuildConfig.SPOONACULAR_API_KEY;
-    EditText inputRecipeName;
+    AutoCompleteTextView inputRecipeName;
     Button searchButton;
     ListView resultListByName;
     ArrayAdapter<RecipeSummary> adapter;

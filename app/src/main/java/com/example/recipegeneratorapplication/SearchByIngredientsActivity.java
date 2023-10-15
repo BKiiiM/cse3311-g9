@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -36,21 +35,21 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
     ArrayAdapter<String> ingredientAutocompleteAdapter;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_by_ingredients);
 
-        //create references to input text box, button and list view
-        ingredient1 = findViewById(R.id.ingredient_1_input);
-        ingredient2 = findViewById(R.id.ingredient_2_input);
-        ingredient3 = findViewById(R.id.ingredient_3_input);
-        searchByIngredientButton = findViewById(R.id.search_ingredients);
+        //create references to ingredient 1,2,3 inputs, search button and list view
+        ingredient1 =findViewById(R.id.ingredient_1_input);
+        ingredient2 =findViewById(R.id.ingredient_2_input);
+        ingredient3 =findViewById(R.id.ingredient_3_input);
+        searchByIngredientButton =findViewById(R.id.search_ingredients);
         resultListByIngredients = findViewById(R.id.result_search_ingredients_ListView);
 
         adapterView = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listByIngredients);
         resultListByIngredients.setAdapter(adapterView);
-
         resultListByIngredients.setOnItemClickListener(this::onItemClick);
 
         //setup an OnClickListener to call the function onButtonClick when the
@@ -146,6 +145,9 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
     }
 
     private class recipeSearchByIngredients extends AsyncTask<String, Void, ArrayList<RecipeSummary>> {
+    //takes a String with the query containing the ingredients(ingredient1,ingredient2,ingredient3)
+    //has a result of matching recipes with their id and title, these will be display in the ListView
+    //widget on the app screen
         @Override
         protected ArrayList<RecipeSummary> doInBackground(String... params) {
             String ingredientInput = params[0];
