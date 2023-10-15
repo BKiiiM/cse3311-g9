@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -33,13 +32,14 @@ public class SearchByIngredientsActivity extends AppCompatActivity
     ArrayAdapter<RecipeSummary> adapterView;
     ArrayList<RecipeSummary> listByIngredients = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_by_ingredients);
 
-        //create references to input text box, button and list view
+        //create references to ingredient 1,2,3 inputs, search button and list view
         ingredient1 =findViewById(R.id.ingredient_1_input);
         ingredient2 =findViewById(R.id.ingredient_2_input);
         ingredient3 =findViewById(R.id.ingredient_3_input);
@@ -48,7 +48,6 @@ public class SearchByIngredientsActivity extends AppCompatActivity
 
         adapterView = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listByIngredients);
         resultListByIngredients.setAdapter(adapterView);
-
         resultListByIngredients.setOnItemClickListener(this::onItemClick);
 
         //setup an OnClickListener to call the function onButtonClick when the
@@ -80,6 +79,9 @@ public class SearchByIngredientsActivity extends AppCompatActivity
         SearchByIngredientsActivity.this.startActivity(myIntent);
 
     }
+    //takes a String with the query containing the ingredients(ingredient1,ingredient2,ingredient3)
+    //has a result of matching recipes with their id and title, these will be display in the ListView
+    //widget on the app screen
     private class recipeSearchByIngredients extends AsyncTask<String, Void, ArrayList<RecipeSummary>>
     {
         @Override

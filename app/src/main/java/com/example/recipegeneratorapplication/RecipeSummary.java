@@ -22,9 +22,9 @@ public class RecipeSummary
         this.title = title;
     }
 
-    public String toString()
-    {
-        return title;
-    }
+    //creates toString method to return the string with the title to display on the ListView widget
+    //this method overrides the default toString method from java because returns
+    //the name of the class and memory address instead of the title string
+    public String toString(){ return title; }
 
 }
