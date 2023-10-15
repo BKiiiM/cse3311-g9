@@ -93,7 +93,7 @@ public class ingredientAutocomplete extends AppCompatActivity {
                     ArrayList<String> ingredientNames = new ArrayList<>();
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject ingredient = jsonArray.getJSONObject(i);
-                        String ingredientName = ingredient.getString("name"); // Use the correct key
+                        String ingredientName = ingredient.getString("name");
                         ingredientNames.add(ingredientName);
                     }
 
@@ -109,7 +109,6 @@ public class ingredientAutocomplete extends AppCompatActivity {
         @Override
         protected void onPostExecute(ArrayList<String> ingredientNames) {
             if (ingredientNames != null) {
-                // Update the adapter with the new data
                 adapter.clear();
                 adapter.addAll(ingredientNames);
             }
