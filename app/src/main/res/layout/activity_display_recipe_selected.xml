@@ -60,8 +60,8 @@
 
             <ImageView
                 android:id="@+id/recipe_photo"
-                android:layout_width="300dp"
-                android:layout_height="250dp"
+                android:layout_width="350dp"
+                android:layout_height="300dp"
                 android:layout_marginTop="10dp"
                 android:contentDescription="@string/selected_recipe_photo"
                 tools:srcCompat="@tools:sample/avatars" />
