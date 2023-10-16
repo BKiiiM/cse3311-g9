@@ -7,9 +7,11 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class MainMenuActivity extends AppCompatActivity
+{
 
-    Button search_button;
+    Button search_name_button;
+    Button search_ingredient_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -17,18 +19,26 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        // Initialize the search button
-        search_button = (Button) findViewById(R.id.search_by_name);
-
-        // Set a click listener to navigate to the SearchByNameActivity
-        search_button.setOnClickListener(this::next_screen);
+        //Initialize buttons using xml ids
+        search_ingredient_button = (Button) findViewById(R.id.ingredient_1_input);
+        search_name_button = (Button) findViewById(R.id.search_by_name);
+        // Set click listener to navigate to the SearchByNameActivity
+        search_name_button.setOnClickListener(this::goToNameSearch);
+        // Set click listener to navigate to the SearchByIngredientsActivity
+        search_ingredient_button.setOnClickListener(this::goToIngredientSearch);
 
     }
 
     // This method navigates to the SearchByNameActivity
-    private void next_screen(View view)
+    private void goToNameSearch(View view)
     {
         Intent myIntent = new Intent(MainMenuActivity.this, SearchByNameActivity.class);
+        MainMenuActivity.this.startActivity(myIntent);
+    }
+    //this method navigates to the SearchByIngredientsActivity
+    private void goToIngredientSearch(View view)
+    {
+        Intent myIntent = new Intent(MainMenuActivity.this, SearchByIngredientsActivity.class);
         MainMenuActivity.this.startActivity(myIntent);
     }
 

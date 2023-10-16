@@ -18,4 +18,20 @@
     <string name="recipe_autofill">recipe</string>
     <string name="input_ingredients_message">Enter Ingredients</string>
     <string name="hint_user_input_recipe_name">recipe name</string>
+    <string name="selected_recipe_title" />
+    <string name="selcted_recipe_photo" />
+    <string name="selected_recipe_id" />
+    <string name="selected_recipe_instructions" />
+    <string name="selected_recipe_photo" />
+    <string name="selected_recipe_ingredients" />
+    <string name="recipe_ingredients_input_box" />
+    <string name="recipe_ingredients_message" />
+    <string name="ingredients_input_box_hint">eggs,flour,sugar</string>
+    <string name="enter_ingredients_message">Enter Ingredients</string>
+    <string name="button_search_ingredients">SEARCH</string>
+    <string name="ingredientTitle">Ingredients</string>
+    <string name="preparationTitle">Preparation</string>
+    <string name="ingredient1">Ingredient 1</string>
+    <string name="ingredient2">Ingredient 2</string>
+    <string name="ingredient3">Ingredient 3</string>
 </resources>

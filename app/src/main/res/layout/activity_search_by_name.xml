@@ -4,13 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/food_background_temp"
+    android:background="@color/white"
     tools:context=".SearchByNameActivity">
 
-    <EditText
+
+    <TextView
+        android:id="@+id/enter_recipe_name_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/purple_200"
+        android:ems="10"
+        android:fontFamily="cursive"
+        android:minHeight="48dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/recipe_name_message"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <AutoCompleteTextView
         android:id="@+id/recipe_name_input_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:autofillHints="@string/recipe_autofill"
         android:ems="10"
         android:hint="@string/hint_user_input_recipe_name"
@@ -18,54 +43,33 @@
         android:text="@string/recipe_name_input_box"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.446" />
-
-    <TextView
-        android:id="@+id/enter_recipe_name_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:text="@string/recipe_name_message"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/recipe_name_input_box"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.735" />
+        app:layout_constraintTop_toBottomOf="@+id/enter_recipe_name_TextView" />
 
     <Button
         android:id="@+id/search_name_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="10dp"
         android:text="@string/search_name"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_name_input_box"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/recipe_name_input_box" />
 
     <ListView
         android:id="@+id/result_recipe_list"
-        android:layout_width="347dp"
-        android:layout_height="293dp"
+        android:layout_width="368dp"
+        android:layout_height="524dp"
+        android:layout_marginTop="10dp"
         android:background="@color/cardview_light_background"
+        android:foregroundTint="@color/PrimaryDark"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_name_button"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/search_name_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

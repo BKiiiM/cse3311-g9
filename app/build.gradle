@@ -19,6 +19,9 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        buildConfigField("String", "SPOONACULAR_API_KEY", SPOONACULAR_API_KEY)
+
     }
 
     buildTypes {
@@ -70,6 +73,7 @@ dependencies {
 //    implementation 'org.mongodb:mongodb-driver-sync:4.10.2'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.picasso:picasso:2.8'
     implementation 'com.google.code.gson:gson:2.8.8'
     implementation(platform('com.google.firebase:firebase-bom:32.3.1'))
     implementation 'com.google.firebase:firebase-analytics'
@@ -78,5 +82,8 @@ dependencies {
 
 
     testImplementation 'junit:junit:4.13.2'
+
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+
 
 }

@@ -4,110 +4,117 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/food_background_temp"
+    android:layout_gravity="center"
+
+    android:orientation="vertical"
+
+    android:background="@color/white"
 
 
     tools:context=".MainMenuActivity">
 
-    <EditText
+    <TextView
         android:id="@+id/main_greeting"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:ems="10"
         android:fontFamily="cursive"
-        android:inputType="text"
         android:labelFor="@id/main_greeting"
         android:text="@string/main_greeting"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="38sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.197" />
+        app:layout_constraintVertical_bias="0.12" />
 
     <Button
         android:id="@+id/search_by_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="44dp"
         android:text="@string/by_name"
         android:textAlignment="center"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/ingredient_1_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_greeting" />
 
     <Button
-        android:id="@+id/search_by_ingredients"
+        android:id="@+id/ingredient_1_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginBottom="388dp"
         android:text="@string/by_ingredients"
         android:textAlignment="center"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_by_name" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/saved_recipes"
-        android:layout_width="157dp"
-        android:layout_height="52dp"
+        android:layout_width="181dp"
+        android:layout_height="64dp"
         android:layout_marginStart="4dp"
+        android:backgroundTint="@color/purple_500"
         android:ems="10"
         android:fontFamily="casual"
-        android:inputType="text"
         android:text="@string/saved_recipe"
         android:textAlignment="center"
-        android:textAllCaps="true"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.185"
+        app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.621" />
+        app:layout_constraintVertical_bias="0.583" />
 
-    <EditText
+    <TextView
         android:id="@+id/recipe_history"
-        android:layout_width="159dp"
-        android:layout_height="53dp"
+        android:layout_width="181dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="4dp"
+        android:backgroundTint="@color/purple_500"
         android:ems="10"
         android:fontFamily="casual"
-        android:inputType="text"
         android:text="@string/recipe_history"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.829"
+        app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toEndOf="@+id/saved_recipes"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.622" />
+        app:layout_constraintVertical_bias="0.583" />
 
-    <EditText
+    <TextView
         android:id="@+id/tip_of_the_day"
-        android:layout_width="228dp"
-        android:layout_height="145dp"
+        android:layout_width="263dp"
+        android:layout_height="198dp"
+        android:backgroundTint="@color/black"
         android:ems="10"
         android:fontFamily="serif-monospace"
         android:gravity="center_horizontal"
-        android:inputType="textMultiLine"
         android:text="@string/tip_of_the_day"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.733"
+        app:layout_constraintHorizontal_bias="0.695"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.867" />
+        app:layout_constraintVertical_bias="0.924" />
 </androidx.constraintlayout.widget.ConstraintLayout>

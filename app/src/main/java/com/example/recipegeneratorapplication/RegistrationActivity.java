@@ -65,6 +65,7 @@ public class RegistrationActivity extends AppCompatActivity {
         alreadyHaveAccountText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // Create an Intent to navigate to the LoginActivity
                 Intent loginIntent = new Intent(RegistrationActivity.this, LoginActivity.class);
 
