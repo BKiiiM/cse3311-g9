@@ -23,8 +23,9 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="402dp"
-        android:layout_height="714dp"
+        android:layout_width="392dp"
+        android:layout_height="691dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
@@ -39,7 +40,7 @@
 
             <TextView
                 android:id="@+id/recipe_title"
-                android:layout_width="217dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:ellipsize="marquee"
@@ -60,8 +61,8 @@
 
             <ImageView
                 android:id="@+id/recipe_photo"
-                android:layout_width="350dp"
-                android:layout_height="300dp"
+                android:layout_width="325dp"
+                android:layout_height="285dp"
                 android:layout_marginTop="10dp"
                 android:contentDescription="@string/selected_recipe_photo"
                 tools:srcCompat="@tools:sample/avatars" />
