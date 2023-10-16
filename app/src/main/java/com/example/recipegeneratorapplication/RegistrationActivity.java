@@ -54,7 +54,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 Log.d("RegistrationActivity", "Password: " + password);
                 Log.d("RegistrationActivity", "Confirm Password: " + confirmPassword);
 
-                Toast.makeText(RegistrationActivity.this, "Register button clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(RegistrationActivity.this, "Register button clicked", Toast.LENGTH_SHORT).show();
 
                 // Call the method to handle user registration
                 handleSignupDialog();
@@ -73,6 +73,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 startActivity(loginIntent);
             }
         });
+    }
+
+    // Usage: function to navigate to next screen
+    private void next_screen() {
+        finish();
+        Intent myIntent = new Intent(RegistrationActivity.this, LoginActivity.class);
+        RegistrationActivity.this.startActivity(myIntent);
     }
 
     private void handleSignupDialog() {
@@ -119,6 +126,8 @@ public class RegistrationActivity extends AppCompatActivity {
                         // Show a success toast message
                         Toast.makeText(RegistrationActivity.this,
                                 "Signed up successfully", Toast.LENGTH_LONG).show();
+                        next_screen();
+
                     } else {
                         // Registration failed
                         if (task.getException() instanceof FirebaseAuthUserCollisionException) {
