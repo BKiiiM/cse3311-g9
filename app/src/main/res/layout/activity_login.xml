@@ -96,7 +96,7 @@
             android:padding="7dp"
             android:text="Don't have an account? Sign up"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textStyle="bold"
 
             />
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:text="Sign in with Google"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             />
 
