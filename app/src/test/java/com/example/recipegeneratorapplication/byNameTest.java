@@ -61,6 +61,7 @@ public class byNameTest {
             e.printStackTrace();
         }
 
+        // Check if result is NULL (has no data)
         assertNotNull(result);
     }
 }

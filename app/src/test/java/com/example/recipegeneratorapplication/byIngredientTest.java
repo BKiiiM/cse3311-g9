@@ -59,7 +59,7 @@ public class byIngredientTest {
             e.printStackTrace();
         }
 
-
+        // Check if listResult is NULL (has no data)
         assertNotNull(listResult);
     }
 }
