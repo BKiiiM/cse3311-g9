@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class byIngredientTest {
     @Test
-    public void byNameTesting() {
+    public void byIngredientTesting() {
         String API_KEY = BuildConfig.SPOONACULAR_API_KEY;
         ArrayList<RecipeSummary> listResult = new ArrayList<>();
 
