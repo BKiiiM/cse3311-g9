@@ -50,7 +50,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Call the method to handle login
-                handleLoginDialog();
+               // handleLoginDialog();
+
+                //TEMPORARY CODE TO BYPASS LOGIN while fixing the Main Menu Activity
+                Intent myIntent = new Intent(LoginActivity.this, MainMenuActivity.class);
+                LoginActivity.this.startActivity(myIntent);
             }
         });
 
@@ -58,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         noAccountText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // Create an intent to navigate to the registration activity
                 Intent registrationIntent = new Intent(LoginActivity.this, RegistrationActivity.class);
 
