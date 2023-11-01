@@ -4,14 +4,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class MainMenuActivity extends AppCompatActivity
 {
 
     Button search_name_button;
     Button search_ingredient_button;
+    private TextView tipOfTheDayTextView;
+    private List<String> tips;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,6 +39,13 @@ public class MainMenuActivity extends AppCompatActivity
         // Set click listener to navigate to the SearchByIngredientsActivity
         search_ingredient_button.setOnClickListener(this::goToIngredientSearch);
 
+        tipOfTheDayTextView = findViewById(R.id.tip_of_the_day);
+
+        // Read tips from the "cookingtips.txt" file located in res/raw/ and store them in the tips list.
+        tips = readTipsFromRawResource(R.raw.cookingtips);
+
+        displayRandomTipOfTheDay();
+
     }
 
     // This method navigates to the SearchByNameActivity
@@ -40,6 +59,36 @@ public class MainMenuActivity extends AppCompatActivity
     {
         Intent myIntent = new Intent(MainMenuActivity.this, SearchByIngredientsActivity.class);
         MainMenuActivity.this.startActivity(myIntent);
+    }
+
+    private List<String> readTipsFromRawResource(int resourceId) {
+        List<String> tipList = new ArrayList<>();
+        InputStream inputStream = getResources().openRawResource(resourceId);
+
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                tipList.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return tipList;
+    }
+    private void displayRandomTipOfTheDay() {
+        if (!tips.isEmpty()) {
+            int randomIndex = new Random().nextInt(tips.size());
+            String randomTip = tips.get(randomIndex);
+            tipOfTheDayTextView.setText(randomTip);
+        }
     }
 
 }
