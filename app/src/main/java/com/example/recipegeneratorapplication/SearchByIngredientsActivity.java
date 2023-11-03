@@ -28,6 +28,8 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
     AutoCompleteTextView ingredient1;
     AutoCompleteTextView ingredient2;
     AutoCompleteTextView ingredient3;
+    AutoCompleteTextView ingredient4;
+    AutoCompleteTextView ingredient5;
     Button searchByIngredientButton;
     ListView resultListByIngredients;
     ArrayAdapter<RecipeSummary> adapterView;
@@ -45,6 +47,8 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
         ingredient1 =findViewById(R.id.ingredient_1_input);
         ingredient2 =findViewById(R.id.ingredient_2_input);
         ingredient3 =findViewById(R.id.ingredient_3_input);
+        ingredient4 =findViewById(R.id.ingredient_4_input);
+        ingredient5 =findViewById(R.id.ingredient_5_input);
         searchByIngredientButton =findViewById(R.id.search_ingredients);
         resultListByIngredients = findViewById(R.id.result_search_ingredients_ListView);
 
@@ -56,19 +60,20 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
         //search button is clicked
         searchByIngredientButton.setOnClickListener(this::onButtonClick);
 
-        ingredient1 = findViewById(R.id.ingredient_1_input);
-        ingredient2 = findViewById(R.id.ingredient_2_input);
-        ingredient3 = findViewById(R.id.ingredient_3_input);
-
         // Initialize the AutoCompleteTextView adapters
         ingredientAutocompleteAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         ingredient1.setAdapter(ingredientAutocompleteAdapter);
         ingredient2.setAdapter(ingredientAutocompleteAdapter);
         ingredient3.setAdapter(ingredientAutocompleteAdapter);
+        ingredient4.setAdapter(ingredientAutocompleteAdapter);
+        ingredient5.setAdapter(ingredientAutocompleteAdapter);
 
         ingredient1.setThreshold(1);  // Display suggestions after typing 1 character
         ingredient2.setThreshold(1);
         ingredient3.setThreshold(1);
+        ingredient4.setThreshold(1);
+        ingredient5.setThreshold(1);
+
 
         ingredient1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -119,16 +124,54 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
             }
         });
+        ingredient4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Call the autocomplete task with the current text in ingredient1
+                new IngredientAutocompleteTask(ingredient4).execute(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+
+        });
+        ingredient5.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Call the autocomplete task with the current text in ingredient1
+                new IngredientAutocompleteTask(ingredient5).execute(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+
+        });
     }
 
     private void onButtonClick(View view) {
         String query1 = ingredient1.getText().toString().trim();
         String query2 = ingredient2.getText().toString().trim();
         String query3 = ingredient3.getText().toString().trim();
+        String query4 = ingredient4.getText().toString().trim();
+        String query5 = ingredient5.getText().toString().trim();
 
-        String all_ingredients_query = query1 + "," + query2 + "," + query3;
+        //concatenate all ingredient inputs into one string to use in Spoonacular API call
+        String all_ingredients_query = query1 + "," + query2 + "," + query3 + "," + query4 + "," + query5;
 
-        if (!query1.isEmpty() || !query2.isEmpty() || !query3.isEmpty()) {
+        if (!query1.isEmpty() || !query2.isEmpty() || !query3.isEmpty()|| !query4.isEmpty()|| !query5.isEmpty())
+        {
             new recipeSearchByIngredients().execute(all_ingredients_query);
         }
     }
@@ -145,7 +188,7 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
     }
 
     private class recipeSearchByIngredients extends AsyncTask<String, Void, ArrayList<RecipeSummary>> {
-    //takes a String with the query containing the ingredients(ingredient1,ingredient2,ingredient3)
+    //takes a String with the query containing the ingredients(ingredient1,ingredient2,ingredient3,ingredient4,ingredient5)
     //has a result of matching recipes with their id and title, these will be display in the ListView
     //widget on the app screen
         @Override
