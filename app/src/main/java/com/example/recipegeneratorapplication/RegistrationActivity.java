@@ -25,8 +25,6 @@ public class RegistrationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Initialize Firebase
-        FirebaseApp.initializeApp(this);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 

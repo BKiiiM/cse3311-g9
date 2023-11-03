@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
+
 public class LoginActivity extends AppCompatActivity {
 
     GoogleSignInOptions gso;
@@ -50,11 +51,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Call the method to handle login
-               // handleLoginDialog();
+                handleLoginDialog();
 
-                //TEMPORARY CODE TO BYPASS LOGIN while fixing the Main Menu Activity
-                Intent myIntent = new Intent(LoginActivity.this, MainMenuActivity.class);
-                LoginActivity.this.startActivity(myIntent);
+//                //TEMPORARY CODE TO BYPASS LOGIN while fixing the Main Menu Activity
+//                Intent myIntent = new Intent(LoginActivity.this, MainMenuActivity.class);
+//                LoginActivity.this.startActivity(myIntent);
             }
         });
 

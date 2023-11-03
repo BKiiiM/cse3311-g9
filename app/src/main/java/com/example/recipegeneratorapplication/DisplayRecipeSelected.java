@@ -1,12 +1,17 @@
 package com.example.recipegeneratorapplication;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
 import com.google.gson.annotations.JsonAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -15,9 +20,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class DisplayRecipeSelected extends AppCompatActivity
 {
@@ -26,6 +37,9 @@ public class DisplayRecipeSelected extends AppCompatActivity
     ImageView selectedRecipePhoto;
     TextView selectedRecipeIngredients;
     TextView selectedRecipeInstructions;
+    int recipeId;
+    private FirebaseAuth mAuth;
+
     private static final String API_KEY = "7bc4cc04deb34da4b63e486dd734ca93";
 
     private class recipeSearchById extends AsyncTask<Integer, Void, JSONObject>
@@ -148,19 +162,73 @@ public class DisplayRecipeSelected extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_recipe_selected);
 
+        mAuth = FirebaseAuth.getInstance();
+
+        if(mAuth == null)
+        {
+            Toast.makeText(DisplayRecipeSelected.this, "mAuth is null", Toast.LENGTH_LONG).show();
+        }
+        else if(mAuth.getCurrentUser() == null)
+        {
+            Toast.makeText(DisplayRecipeSelected.this, "getCurrentUser is null", Toast.LENGTH_LONG).show();
+        }
+
         Intent intent = getIntent();
         int id = intent.getIntExtra("id",0);
+        setRecipeId(id);
         selectedRecipeId = findViewById(R.id.recipe_API_id);
         selectedRecipeTitle = findViewById(R.id.recipe_title);
         selectedRecipePhoto = findViewById(R.id.recipe_photo);
         selectedRecipeIngredients = findViewById(R.id.selected_recipe_ingredients);
         selectedRecipeInstructions = findViewById(R.id.selected_recipe_instructions);
 
+        Button favoriteButton = findViewById(R.id.favorite_button);
+        favoriteButton.setOnClickListener(v -> {
+            if (mAuth.getCurrentUser() == null) {
+                // User is not signed in. Prompt the user to sign in.
+                Toast.makeText(DisplayRecipeSelected.this, "Please sign in to save recipes as favorites", Toast.LENGTH_LONG).show();
+            } else {
+                // User is signed in. Save the recipe to Firebase.
+                saveRecipeToFirebase(recipeId);
+            }
+        });
+
+
         //displays the recipe id on screen just to test the function
         // selectedRecipeId.setText(id+"");
         // selectedRecipeIngredients.setText("");
         new recipeSearchById().execute(id);
+
+
     }
+
+    public int getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(int recipeId) {
+        this.recipeId = recipeId;
+    }
+
+
+    private void saveRecipeToFirebase(int recipeId) {
+        String userId = mAuth.getCurrentUser().getUid().toString();
+
+        // Initialize Firebase Database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference favoriteRecipesRef = database.getReference("users").child(userId).child("favoriteRecipes");
+
+        // Save the recipe ID under the user's "favoriteRecipes" node
+        favoriteRecipesRef.child("recipe" + recipeId).setValue(true);
+
+        // Show a message to indicate that the recipe is now a favorite
+        Toast.makeText(DisplayRecipeSelected.this, "Recipe saved to favorites!", Toast.LENGTH_LONG).show();
+    }
+
+
+
+
+
 
 
 }
