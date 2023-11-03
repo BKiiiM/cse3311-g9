@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
 
-    android:orientation="vertical"
-
     android:background="@color/white"
+
+    android:orientation="vertical"
 
 
     tools:context=".MainMenuActivity">
@@ -16,33 +16,30 @@
     <TextView
         android:id="@+id/main_greeting"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:ems="10"
-        android:fontFamily="cursive"
+        android:fontFamily="sans-serif-medium"
         android:labelFor="@id/main_greeting"
         android:text="@string/main_greeting"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="38sp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.12" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/search_by_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="45dp"
         android:text="@string/by_name"
         android:textAlignment="center"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/ingredient_1_input"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_greeting" />
 
@@ -50,58 +47,55 @@
         android:id="@+id/ingredient_1_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="388dp"
+        android:layout_marginTop="15dp"
         android:text="@string/by_ingredients"
         android:textAlignment="center"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_by_name" />
 
     <TextView
         android:id="@+id/saved_recipes"
-        android:layout_width="181dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="332dp"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="@color/purple_500"
-        android:ems="10"
-        android:fontFamily="casual"
+        android:ems="8"
+        android:fontFamily="sans-serif-thin"
         android:text="@string/saved_recipe"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintEnd_toStartOf="@+id/recipe_history"
+        app:layout_constraintHorizontal_bias="0.326"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.583" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/recipe_history"
-        android:layout_width="181dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="332dp"
+        android:layout_marginEnd="5dp"
         android:backgroundTint="@color/purple_500"
-        android:ems="10"
-        android:fontFamily="casual"
+        android:ems="8"
+        android:fontFamily="sans-serif-thin"
         android:text="@string/recipe_history"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toEndOf="@+id/saved_recipes"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.583" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tip_of_the_day"
-        android:layout_width="263dp"
-        android:layout_height="198dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="164dp"
         android:backgroundTint="@color/black"
         android:ems="10"
         android:fontFamily="serif-monospace"
@@ -111,9 +105,8 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.924" />
+        app:layout_constraintTop_toBottomOf="@+id/ingredient_1_input" />
 </androidx.constraintlayout.widget.ConstraintLayout>
