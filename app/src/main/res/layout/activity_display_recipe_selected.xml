@@ -68,6 +68,76 @@
                 android:layout_marginTop="10dp"
                 android:contentDescription="@string/selected_recipe_photo"
                 tools:srcCompat="@tools:sample/avatars" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:src="@drawable/baseline_access_time_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/TextView_preparation_time"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:padding="8dp"
+                        android:text="25 minutes"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                    <ImageView
+                        android:src="@drawable/baseline_group_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/TextView_portions"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:padding="8dp"
+                        android:text="portions"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:src="@drawable/calories_baseline_fire_department_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/TextView_calories"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:padding="8dp"
+                        android:text="calories"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+                
             <Button
                 android:id="@+id/favorite_button"
                 android:layout_width="200dp"
@@ -143,6 +213,8 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:singleLine="false"
+                android:maxLines="200"
                 app:autoSizeTextType="none"
                 tools:text="recipe instructions" />
 

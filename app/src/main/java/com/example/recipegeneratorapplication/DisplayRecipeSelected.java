@@ -37,6 +37,10 @@ public class DisplayRecipeSelected extends AppCompatActivity
     ImageView selectedRecipePhoto;
     TextView selectedRecipeIngredients;
     TextView selectedRecipeInstructions;
+    TextView selectedRecipeCalories;
+    TextView selectedRecipePrepTime;
+    TextView selectedRecipeServings;
+
     int recipeId;
     private FirebaseAuth mAuth;
 
@@ -54,7 +58,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
             {
                 //creates url string for Spoonacular search
                 String spoonacularUrl = "https://api.spoonacular.com/recipes/" +id+"/information"+
-                        "?apiKey=" + API_KEY;
+                        "?includeNutrition=true&apiKey=" + API_KEY;
                 //creates a pointer to the Spoonacular database host site
                 URL url = new URL(spoonacularUrl);
                 //requests http connection using method "GET"
@@ -92,12 +96,17 @@ public class DisplayRecipeSelected extends AppCompatActivity
         {
             super.onPostExecute(result);
             //updating UI with data from results of JSONObject all fields from API are set here
-            //recipe name, photo, ingredients and instructions
+            //recipe name, photo, number of servings, calories, cooking time
+            //ingredients and instructions
             try
             {
                 selectedRecipeTitle.setText(result.getString("title"));
                 displayIngredients(result);
                 displayInstructions(result);
+                displayCalories(result);
+                displayPrepTime(result);
+                displayPortions(result);
+
                 //Picasso extracts the recipe photo contained in the field "image"
                 // and displays it on the screen using the ImageView widget
                 Picasso.get().load(result.getString("image")).into(selectedRecipePhoto);
@@ -110,6 +119,28 @@ public class DisplayRecipeSelected extends AppCompatActivity
 
         }
     }
+
+    private void displayPrepTime(JSONObject result) throws JSONException
+    {
+        int prepTime = result.getInt("readyInMinutes");
+        selectedRecipePrepTime.setText(prepTime+" Minutes");
+    }
+    private void displayPortions(JSONObject result) throws JSONException
+    {
+        int numberOfServings = result.getInt("servings");
+        selectedRecipeServings.setText(numberOfServings+" Servings");
+    }
+    private void displayCalories(JSONObject result)throws JSONException
+    {
+        JSONObject nutritionObject = result.getJSONObject("nutrition");
+        JSONArray nutrientsArray = nutritionObject.getJSONArray("nutrients");
+        JSONObject calorieObject = nutrientsArray.getJSONObject(0);
+        double calorieCount = calorieObject.getDouble("amount");
+        String totalCalories = Double.toString(calorieCount);
+        selectedRecipeCalories.setText(totalCalories+" Kcal");
+
+    }
+
     private void displayInstructions(JSONObject result) throws JSONException
     {
 
@@ -179,6 +210,9 @@ public class DisplayRecipeSelected extends AppCompatActivity
         selectedRecipeId = findViewById(R.id.recipe_API_id);
         selectedRecipeTitle = findViewById(R.id.recipe_title);
         selectedRecipePhoto = findViewById(R.id.recipe_photo);
+        selectedRecipeCalories = findViewById(R.id.TextView_calories);
+        selectedRecipeServings = findViewById(R.id.TextView_portions);
+        selectedRecipePrepTime = findViewById(R.id.TextView_preparation_time);
         selectedRecipeIngredients = findViewById(R.id.selected_recipe_ingredients);
         selectedRecipeInstructions = findViewById(R.id.selected_recipe_instructions);
 
@@ -210,7 +244,6 @@ public class DisplayRecipeSelected extends AppCompatActivity
         this.recipeId = recipeId;
     }
 
-
     private void saveRecipeToFirebase(int recipeId) {
         String userId = mAuth.getCurrentUser().getUid().toString();
 
@@ -224,11 +257,5 @@ public class DisplayRecipeSelected extends AppCompatActivity
         // Show a message to indicate that the recipe is now a favorite
         Toast.makeText(DisplayRecipeSelected.this, "Recipe saved to favorites!", Toast.LENGTH_LONG).show();
     }
-
-
-
-
-
-
 
 }
