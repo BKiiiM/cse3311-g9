@@ -252,7 +252,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
         DatabaseReference favoriteRecipesRef = database.getReference("users").child(userId).child("favoriteRecipes");
 
         // Save the recipe ID under the user's "favoriteRecipes" node
-        favoriteRecipesRef.child("recipe" + recipeId).setValue(true);
+        favoriteRecipesRef.child(Integer.toString(recipeId)).setValue(true);
 
         // Show a message to indicate that the recipe is now a favorite
         Toast.makeText(DisplayRecipeSelected.this, "Recipe saved to favorites!", Toast.LENGTH_LONG).show();
