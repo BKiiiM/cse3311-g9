@@ -72,7 +72,8 @@
         app:layout_constraintEnd_toStartOf="@+id/recipe_history"
         app:layout_constraintHorizontal_bias="0.326"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:clickable="true"/>
 
     <TextView
         android:id="@+id/recipe_history"
