@@ -25,6 +25,7 @@ public class SearchByNameActivity extends AppCompatActivity
 {
     private static final String API_KEY = BuildConfig.SPOONACULAR_API_KEY;
     AutoCompleteTextView inputRecipeName;
+    AutoCompleteTextView cuisine;
     Button searchButton;
     ListView resultListByName;
     ArrayAdapter<RecipeSummary> adapter;
@@ -40,6 +41,7 @@ public class SearchByNameActivity extends AppCompatActivity
         inputRecipeName = findViewById(R.id.recipe_name_input_box);
         searchButton = findViewById(R.id.search_name_button);
         resultListByName = findViewById(R.id.result_recipe_list);
+        cuisine = findViewById(R.id.cuisine_input);
 
         //We need an array adapter to convert the ArrayList of objects (recipeList) into View items
         // that will be loaded into the ListView container.
@@ -85,6 +87,7 @@ public class SearchByNameActivity extends AppCompatActivity
                 String spoonacularUrl = "https://api.spoonacular.com/recipes/complexSearch" +
                         "?apiKey=" + API_KEY +
                         "&query=" + query +
+                        "&cuisine=" + cuisine +
                         "&number=30"; //number of results shown, we can change this number
 
                 URL url = new URL(spoonacularUrl);

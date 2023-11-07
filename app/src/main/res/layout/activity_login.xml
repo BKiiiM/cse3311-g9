@@ -121,8 +121,8 @@
             android:src="@drawable/googleicon"
 
             />
-    </LinearLayout>
 
+    </LinearLayout>
 
 
 </RelativeLayout>

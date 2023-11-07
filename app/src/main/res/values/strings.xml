@@ -36,4 +36,6 @@
     <string name="ingredient3">Ingredient 3</string>
     <string name="ingredient_4">Ingredient 4</string>
     <string name="ingredient_5">Ingredient 5</string>
+    <string name="cuisine123" />
+    <string name="cuisine">cuisine</string>
 </resources>

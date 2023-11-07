@@ -110,4 +110,5 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingredient_1_input" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
