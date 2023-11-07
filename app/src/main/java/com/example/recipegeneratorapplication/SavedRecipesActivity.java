@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,7 +17,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -29,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SavedRecipesActivity extends AppCompatActivity implements RecipeAdapter.OnRecipeClickListener {
+
+    // Declare member variables
     private RecyclerView recyclerView;
     private RecipeAdapter adapter;
     private List<RecipeSummary> savedRecipes;
@@ -36,10 +36,8 @@ public class SavedRecipesActivity extends AppCompatActivity implements RecipeAda
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("Hello", "in oNCreate method");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_recipes);
-
 
         recyclerView = findViewById(R.id.recyclerView); // Initialize the RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(SavedRecipesActivity.this));
@@ -47,26 +45,26 @@ public class SavedRecipesActivity extends AppCompatActivity implements RecipeAda
         savedRecipes = new ArrayList<>();
         adapter = new RecipeAdapter(SavedRecipesActivity.this, savedRecipes, this);
         recyclerView.setAdapter(adapter);
+
+        // Initialize Firebase Authentication
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
 
         if (user != null) {
-            Log.d("Hello", "in if statement");
-
+            // If a user is logged in
             String userId = user.getUid();
 
+            // Get a reference to the Firebase database
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users"); // Replace with your database reference path
 
             // Reference to the user's node in the database
             DatabaseReference userReference = databaseReference.child(userId).child("favoriteRecipes");
-            Log.d("Hello", "userreference: " + userReference);
 
             userReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    // This method is called when data changes in the database
                     List<String> savedRecipeIds = new ArrayList<>();
-                    Log.d("Hello", "in onDataChange statement");
-
 
                     // Loop through the data to get the saved recipe IDs.
                     for (DataSnapshot recipeSnapshot : dataSnapshot.getChildren()) {
@@ -81,21 +79,16 @@ public class SavedRecipesActivity extends AppCompatActivity implements RecipeAda
                     for (String recipeId : savedRecipeIds) {
                         getRecipeInfo(recipeId);
                     }
-                    Log.d("Hello", "right before adapter");
-
                 }
-
-
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    Log.d("Hello", "in onCancelled");
+                    // Handle errors in reading from the database
                 }
             });
         } else {
             // Handle the case when the user is not logged in.
         }
-
     }
 
     @Override
@@ -109,12 +102,11 @@ public class SavedRecipesActivity extends AppCompatActivity implements RecipeAda
     private class FetchRecipeTask extends AsyncTask<String, Void, RecipeSummary> {
         @Override
         protected RecipeSummary doInBackground(String... params) {
+            // This method performs a network request in the background
             String recipeId = params[0];
             RecipeSummary recipeData = new RecipeSummary();
 
             try {
-
-                Log.d("Hello", "in FetchRecipeTask Try block");
                 // Create the URL for the API request
                 String spoonacularUrl = "https://api.spoonacular.com/recipes/" + recipeId + "/information" + "?apiKey=" + API_KEY;
                 URL url = new URL(spoonacularUrl);
@@ -140,7 +132,6 @@ public class SavedRecipesActivity extends AppCompatActivity implements RecipeAda
                     JSONObject jsonObject = new JSONObject(response.toString());
                     String recipeName = jsonObject.getString("title");
                     int id = jsonObject.getInt("id");
-                    Log.d("Hello", "JSONObject: " + jsonObject);
 
                     recipeData.setId(id);
                     recipeData.setTitle(recipeName);
@@ -165,14 +156,8 @@ public class SavedRecipesActivity extends AppCompatActivity implements RecipeAda
         }
     }
 
-
     public void getRecipeInfo(String recipeId) {
+        // Start the FetchRecipeTask to fetch recipe data
         new FetchRecipeTask().execute(recipeId);
     }
-
-
-
-
-
-
 }
