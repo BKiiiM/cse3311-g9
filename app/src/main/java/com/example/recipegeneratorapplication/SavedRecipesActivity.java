@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,7 +28,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SavedRecipesActivity extends AppCompatActivity {
+public class SavedRecipesActivity extends AppCompatActivity implements RecipeAdapter.OnRecipeClickListener {
     private RecyclerView recyclerView;
     private RecipeAdapter adapter;
     private List<RecipeSummary> savedRecipes;
@@ -39,11 +40,12 @@ public class SavedRecipesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_recipes);
 
+
         recyclerView = findViewById(R.id.recyclerView); // Initialize the RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(SavedRecipesActivity.this));
 
         savedRecipes = new ArrayList<>();
-        adapter = new RecipeAdapter(SavedRecipesActivity.this, savedRecipes);
+        adapter = new RecipeAdapter(SavedRecipesActivity.this, savedRecipes, this);
         recyclerView.setAdapter(adapter);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
@@ -94,6 +96,14 @@ public class SavedRecipesActivity extends AppCompatActivity {
             // Handle the case when the user is not logged in.
         }
 
+    }
+
+    @Override
+    public void onRecipeClick(RecipeSummary recipe) {
+        // Handle the click event when a recipe card is clicked
+        Intent intent = new Intent(SavedRecipesActivity.this, DisplayRecipeSelected.class);
+        intent.putExtra("id", recipe.getId());
+        startActivity(intent);
     }
 
     private class FetchRecipeTask extends AsyncTask<String, Void, RecipeSummary> {
@@ -159,6 +169,10 @@ public class SavedRecipesActivity extends AppCompatActivity {
     public void getRecipeInfo(String recipeId) {
         new FetchRecipeTask().execute(recipeId);
     }
+
+
+
+
 
 
 }

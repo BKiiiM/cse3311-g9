@@ -11,7 +11,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
 import com.google.gson.annotations.JsonAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -24,6 +27,7 @@ import java.io.Console;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -218,14 +222,21 @@ public class DisplayRecipeSelected extends AppCompatActivity
 
         Button favoriteButton = findViewById(R.id.favorite_button);
         favoriteButton.setOnClickListener(v -> {
-            if (mAuth.getCurrentUser() == null) {
-                // User is not signed in. Prompt the user to sign in.
-                Toast.makeText(DisplayRecipeSelected.this, "Please sign in to save recipes as favorites", Toast.LENGTH_LONG).show();
-            } else {
-                // User is signed in. Save the recipe to Firebase.
+            if (favoriteButton.getText().equals("Favorite")) {
+                // User wants to save the recipe as a favorite
                 saveRecipeToFirebase(recipeId);
+                favoriteButton.setText("Unfavorite");
+                Toast.makeText(DisplayRecipeSelected.this, "Recipe saved to favorites!", Toast.LENGTH_LONG).show();
+            } else {
+                // User wants to remove the recipe from favorites
+                unfavoriteRecipe(recipeId);
+                favoriteButton.setText("Favorite");
+                Toast.makeText(DisplayRecipeSelected.this, "Recipe removed from favorites!", Toast.LENGTH_LONG).show();
             }
         });
+
+        new CheckFavoriteRecipeTask().execute(recipeId);
+
 
 
         //displays the recipe id on screen just to test the function
@@ -256,6 +267,55 @@ public class DisplayRecipeSelected extends AppCompatActivity
 
         // Show a message to indicate that the recipe is now a favorite
         Toast.makeText(DisplayRecipeSelected.this, "Recipe saved to favorites!", Toast.LENGTH_LONG).show();
+    }
+
+
+    private void unfavoriteRecipe(int recipeId) {
+        String userId = mAuth.getCurrentUser().getUid();
+        DatabaseReference favoriteRecipesRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("favoriteRecipes");
+        favoriteRecipesRef.child(Integer.toString(recipeId)).removeValue();
+    }
+
+    private boolean isRecipeFavorited(int recipeId) {
+        String userId = mAuth.getCurrentUser().getUid();
+        DatabaseReference favoriteRecipesRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("favoriteRecipes").child(Integer.toString(recipeId));
+
+        try {
+            DataSnapshot dataSnapshot = Tasks.await(favoriteRecipesRef.get()); // Use the get method to fetch the data
+            Boolean isFavorited = dataSnapshot.getValue(Boolean.class);
+
+            return isFavorited != null && isFavorited;
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private class CheckFavoriteRecipeTask extends AsyncTask<Integer, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Integer... params) {
+            String userId = mAuth.getCurrentUser().getUid();
+            DatabaseReference favoriteRecipesRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("favoriteRecipes").child(Integer.toString(params[0]));
+
+            try {
+                DataSnapshot dataSnapshot = Tasks.await(favoriteRecipesRef.get());
+                Boolean isFavorited = dataSnapshot.getValue(Boolean.class);
+                return isFavorited != null && isFavorited;
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean isFavorited) {
+            Button favoriteButton = findViewById(R.id.favorite_button);
+            if (isFavorited) {
+                favoriteButton.setText("Unfavorite");
+            } else {
+                favoriteButton.setText("Favorite");
+            }
+        }
     }
 
 }
