@@ -6,6 +6,9 @@ public class RecipeSummary
 {
     int id;
     String title;
+
+
+    String recipeImageURL;
     public int getId() {
         return id;
     }
@@ -26,5 +29,13 @@ public class RecipeSummary
     //this method overrides the default toString method from java because returns
     //the name of the class and memory address instead of the title string
     public String toString(){ return title; }
+
+    public String getRecipeImageURL() {
+        return recipeImageURL;
+    }
+
+    public void setRecipeImageURL(String recipeImageURL) {
+        this.recipeImageURL = recipeImageURL;
+    }
 
 }

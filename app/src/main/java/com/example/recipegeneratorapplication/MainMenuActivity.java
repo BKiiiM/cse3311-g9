@@ -21,6 +21,7 @@ public class MainMenuActivity extends AppCompatActivity
 
     Button search_name_button;
     Button search_ingredient_button;
+    TextView displaySaved;
     private TextView tipOfTheDayTextView;
     private List<String> tips;
 
@@ -34,10 +35,12 @@ public class MainMenuActivity extends AppCompatActivity
         //Initialize buttons using xml ids
         search_ingredient_button = (Button) findViewById(R.id.ingredient_1_input);
         search_name_button = (Button) findViewById(R.id.search_by_name);
+        displaySaved = (TextView) findViewById(R.id.saved_recipes);
         // Set click listener to navigate to the SearchByNameActivity
         search_name_button.setOnClickListener(this::goToNameSearch);
         // Set click listener to navigate to the SearchByIngredientsActivity
         search_ingredient_button.setOnClickListener(this::goToIngredientSearch);
+        displaySaved.setOnClickListener(this::goToSavedRecipes);
 
         tipOfTheDayTextView = findViewById(R.id.tip_of_the_day);
 
@@ -58,6 +61,12 @@ public class MainMenuActivity extends AppCompatActivity
     private void goToIngredientSearch(View view)
     {
         Intent myIntent = new Intent(MainMenuActivity.this, SearchByIngredientsActivity.class);
+        MainMenuActivity.this.startActivity(myIntent);
+    }
+
+    private void goToSavedRecipes(View view)
+    {
+        Intent myIntent = new Intent(MainMenuActivity.this, SavedRecipesActivity.class);
         MainMenuActivity.this.startActivity(myIntent);
     }
 

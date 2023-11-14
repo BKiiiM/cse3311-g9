@@ -1,4 +1,4 @@
-
+4
 Cooking Recipe Generator Application
 
 Group 9's Project: AI generated recipes.
