@@ -57,6 +57,8 @@ public class DisplayRecipeSelected extends AppCompatActivity
             try
             {
                 //creates url string for Spoonacular search
+                //we add to the string includeNutrition=true to get calories,servings and
+                //preparation time information from spoonacular API
                 String spoonacularUrl = "https://api.spoonacular.com/recipes/" +id+"/information"+
                         "?includeNutrition=true&apiKey=" + API_KEY;
                 //creates a pointer to the Spoonacular database host site
@@ -116,10 +118,8 @@ public class DisplayRecipeSelected extends AppCompatActivity
             {
                 throw new RuntimeException(e);
             }
-
         }
     }
-
     private void displayPrepTime(JSONObject result) throws JSONException
     {
         int prepTime = result.getInt("readyInMinutes");
@@ -140,7 +140,6 @@ public class DisplayRecipeSelected extends AppCompatActivity
         selectedRecipeCalories.setText(totalCalories+" Kcal");
 
     }
-
     private void displayInstructions(JSONObject result) throws JSONException
     {
 
