@@ -38,4 +38,9 @@
     <string name="ingredient_5">Ingredient 5</string>
     <string name="cuisine123" />
     <string name="cuisine">cuisine</string>
+    <string name="exclude_gluten">exclude gluten</string>
+    <string name="exclude_dairy">exclude dairy</string>
+    <string name="one_serving">1 serving</string>
+    <string name="exclude_peanut">exclude peanut</string>
+    <string name="input_name_message">Enter Recipe Name</string>
 </resources>

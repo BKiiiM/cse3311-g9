@@ -8,7 +8,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,9 +29,14 @@ public class SearchByNameActivity extends AppCompatActivity
     AutoCompleteTextView inputRecipeName;
     AutoCompleteTextView cuisine;
     Button searchButton;
+    CheckBox ExcludeGluten;
+    CheckBox ExcludeDairy;
+    CheckBox ExcludePeanut;
+    TextView RecipeNameMessage;
     ListView resultListByName;
     ArrayAdapter<RecipeSummary> adapter;
     ArrayList<RecipeSummary> recipeList = new ArrayList<>();
+    public String intoleranceString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,13 +49,53 @@ public class SearchByNameActivity extends AppCompatActivity
         searchButton = findViewById(R.id.search_name_button);
         resultListByName = findViewById(R.id.result_recipe_list);
         cuisine = findViewById(R.id.cuisine_input);
+        ExcludeGluten = findViewById(R.id.gluten_checkBox);
+        ExcludeDairy = findViewById(R.id.dairy_checkBox);
+        ExcludePeanut = findViewById(R.id.peanut_checkbox);
+
+        //changed message title to test the api call
+        RecipeNameMessage =findViewById(R.id.enter_recipe_name_TextView);
 
         //We need an array adapter to convert the ArrayList of objects (recipeList) into View items
         // that will be loaded into the ListView container.
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipeList);
         resultListByName.setAdapter(adapter);
-
         resultListByName.setOnItemClickListener(this::onItemClick);
+
+        ExcludeGluten.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // The gluten checkbox is checked
+                intoleranceString = "gluten";
+
+            }
+            else {
+                // The gluten checkbox is unchecked
+                   intoleranceString = intoleranceString;
+            }
+        });
+        ExcludeDairy.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    if (isChecked) {
+                        // The dairy checkbox is checked
+                        intoleranceString = intoleranceString + ",dairy";
+
+                    }
+                    else {
+                        // The dairy checkbox is unchecked
+                        intoleranceString = intoleranceString;
+                    }
+                });
+
+        ExcludePeanut.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // The peanut checkbox is checked
+                intoleranceString = intoleranceString + ",peanut";
+
+            }
+            else {
+                // The peanut checkbox is unchecked
+                intoleranceString = intoleranceString;
+            }
+        });
 
         searchButton.setOnClickListener(v ->
         {
@@ -73,12 +120,16 @@ public class SearchByNameActivity extends AppCompatActivity
 
     }
 
-
     private class recipeSearchByName extends AsyncTask<String, Void, ArrayList<RecipeSummary>>
     {
         @Override
         protected ArrayList<RecipeSummary> doInBackground(String... params)
         {
+
+            //String intolerances = concatenateIntoleranceString(ExcludeGluten.isChecked(), ExcludeDairy.isChecked());
+
+
+
             String query = params[0];
             ArrayList<RecipeSummary> result = new ArrayList<>();
 
@@ -87,8 +138,13 @@ public class SearchByNameActivity extends AppCompatActivity
                 String spoonacularUrl = "https://api.spoonacular.com/recipes/complexSearch" +
                         "?apiKey=" + API_KEY +
                         "&query=" + query +
+                        "&intolerances=" + intoleranceString +
                         "&cuisine=" + cuisine +
                         "&number=30"; //number of results shown, we can change this number
+
+                //THIS PRINTOUT TESTS OUR API CALL
+               /*String test =spoonacularUrl;
+                       Test.setText(test);*/
 
                 URL url = new URL(spoonacularUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -144,3 +200,5 @@ public class SearchByNameActivity extends AppCompatActivity
         }
     }
 }
+
+

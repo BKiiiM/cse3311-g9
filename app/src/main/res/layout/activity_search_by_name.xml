@@ -10,10 +10,10 @@
 
     <TextView
         android:id="@+id/enter_recipe_name_TextView"
+        android:backgroundTint="@color/purple_200"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/purple_200"
         android:ems="10"
         android:fontFamily="sans-serif-light"
         android:minHeight="48dp"
@@ -21,20 +21,20 @@
         android:paddingTop="8dp"
         android:paddingRight="8dp"
         android:paddingBottom="8dp"
-        android:text="@string/recipe_name_message"
+        android:singleLine="false"
+        android:text="@string/input_name_message"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <AutoCompleteTextView
         android:id="@+id/recipe_name_input_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="217dp"
+        android:layout_height="54dp"
         android:layout_marginTop="10dp"
         android:autofillHints="@string/recipe_autofill"
         android:ems="10"
@@ -42,7 +42,7 @@
         android:inputType="text"
         android:text="@string/recipe_name_input_box"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,42 +50,88 @@
 
     <AutoCompleteTextView
         android:id="@+id/cuisine_input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="218dp"
+        android:layout_height="54dp"
         android:layout_marginTop="10dp"
+
         android:autofillHints="@string/recipe_autofill"
         android:ems="10"
         android:hint="@string/cuisine"
         android:inputType="text"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recipe_name_input_box" />
 
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="402dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cuisine_input">
+
+        <CheckBox
+            android:id="@+id/gluten_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="8"
+            android:text="@string/exclude_gluten" />
+
+        <CheckBox
+            android:id="@+id/dairy_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="8"
+            android:text="@string/exclude_dairy" />
+
+        <CheckBox
+            android:id="@+id/peanut_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ems="8"
+            android:text="@string/exclude_peanut" />
+    </LinearLayout>
+
     <Button
+
         android:id="@+id/search_name_button"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/input_bg"
         android:text="@string/search_name"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="22sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cuisine_input" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <ListView
         android:id="@+id/result_recipe_list"
-        android:layout_width="368dp"
-        android:layout_height="524dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="377dp"
+        android:layout_height="340dp"
+        android:layout_marginTop="24dp"
         android:background="@color/cardview_light_background"
         android:foregroundTint="@color/PrimaryDark"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_name_button" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
