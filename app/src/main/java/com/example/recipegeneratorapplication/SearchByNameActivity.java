@@ -36,7 +36,6 @@ public class SearchByNameActivity extends AppCompatActivity
     ListView resultListByName;
     ArrayAdapter<RecipeSummary> adapter;
     ArrayList<RecipeSummary> recipeList = new ArrayList<>();
-    public String intoleranceString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,40 +61,7 @@ public class SearchByNameActivity extends AppCompatActivity
         resultListByName.setAdapter(adapter);
         resultListByName.setOnItemClickListener(this::onItemClick);
 
-        ExcludeGluten.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                // The gluten checkbox is checked
-                intoleranceString = "gluten";
 
-            }
-            else {
-                // The gluten checkbox is unchecked
-                   intoleranceString = intoleranceString;
-            }
-        });
-        ExcludeDairy.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                    if (isChecked) {
-                        // The dairy checkbox is checked
-                        intoleranceString = intoleranceString + ",dairy";
-
-                    }
-                    else {
-                        // The dairy checkbox is unchecked
-                        intoleranceString = intoleranceString;
-                    }
-                });
-
-        ExcludePeanut.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                // The peanut checkbox is checked
-                intoleranceString = intoleranceString + ",peanut";
-
-            }
-            else {
-                // The peanut checkbox is unchecked
-                intoleranceString = intoleranceString;
-            }
-        });
 
         searchButton.setOnClickListener(v ->
         {
@@ -126,7 +92,20 @@ public class SearchByNameActivity extends AppCompatActivity
         protected ArrayList<RecipeSummary> doInBackground(String... params)
         {
 
-            //String intolerances = concatenateIntoleranceString(ExcludeGluten.isChecked(), ExcludeDairy.isChecked());
+            String intolerances = "";
+            if (ExcludeGluten.isChecked())
+            {
+                intolerances = "gluten";
+            }
+            if(ExcludeDairy.isChecked())
+            {
+                intolerances = intolerances+",dairy";
+            }
+            if(ExcludePeanut.isChecked())
+            {
+                intolerances = intolerances+",peanut";
+            }
+
 
 
 
@@ -138,7 +117,7 @@ public class SearchByNameActivity extends AppCompatActivity
                 String spoonacularUrl = "https://api.spoonacular.com/recipes/complexSearch" +
                         "?apiKey=" + API_KEY +
                         "&query=" + query +
-                        "&intolerances=" + intoleranceString +
+                        "&intolerances=" + intolerances +
                         "&cuisine=" + cuisine +
                         "&number=30"; //number of results shown, we can change this number
 
