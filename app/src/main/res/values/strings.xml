@@ -43,4 +43,8 @@
     <string name="one_serving">1 serving</string>
     <string name="exclude_peanut">exclude peanut</string>
     <string name="input_name_message">Enter Recipe Name</string>
+    <string name="favorite_recipes_link">Favorite Recipes</string>
+    <string name="gluten_free_string">gluten-free</string>
+    <string name="peanut_free_string">peanut-free</string>
+    <string name="dairy_free_string">dairy-free</string>
 </resources>

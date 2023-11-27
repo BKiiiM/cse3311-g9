@@ -37,8 +37,6 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
     ArrayList<RecipeSummary> listByIngredients = new ArrayList<>();
     ArrayAdapter<String> ingredientAutocompleteAdapter;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,36 +74,30 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
         ingredient4.setThreshold(1);
         ingredient5.setThreshold(1);
 
-
         ingredient1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Call the autocomplete task with the current text in ingredient1
                 new IngredientAutocompleteTask(ingredient1).execute(charSequence.toString());
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
 
             }
-
         });
 
         ingredient2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Call the autocomplete task with the current text in ingredient2
                 new IngredientAutocompleteTask(ingredient2).execute(charSequence.toString());
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
             }
@@ -115,13 +107,11 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Call the autocomplete task with the current text in ingredient3
                 new IngredientAutocompleteTask(ingredient3).execute(charSequence.toString());
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
             }
@@ -130,30 +120,25 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Call the autocomplete task with the current text in ingredient1
                 new IngredientAutocompleteTask(ingredient4).execute(charSequence.toString());
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
 
             }
-
         });
         ingredient5.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Call the autocomplete task with the current text in ingredient1
                 new IngredientAutocompleteTask(ingredient5).execute(charSequence.toString());
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
 
@@ -161,7 +146,6 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
 
         });
     }
-
     private void onButtonClick(View view) {
         String query1 = ingredient1.getText().toString().trim();
         String query2 = ingredient2.getText().toString().trim();
@@ -177,9 +161,8 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
             new recipeSearchByIngredients().execute(all_ingredients_query);
         }
     }
-
-    //we need to know the index of the recipe selected by the user
-    //to extract information from the recipe
+    //Get index of the recipe selected by the user
+    //Use index to extract recipe information
     private void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         RecipeSummary recipeData = listByIngredients.get(i);
         int recipeId = recipeData.getId();
@@ -188,7 +171,6 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
         SearchByIngredientsActivity.this.startActivity(myIntent);
 
     }
-
     private class recipeSearchByIngredients extends AsyncTask<String, Void, ArrayList<RecipeSummary>> {
     //takes a String with the query containing the ingredients(ingredient1,ingredient2,ingredient3,ingredient4,ingredient5)
     //has a result of matching recipes with their id and title, these will be display in the ListView
@@ -237,10 +219,7 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             return listResults;
-
-
         }
-
         @Override
         protected void onPostExecute(ArrayList<RecipeSummary> result) {
             super.onPostExecute(result);
@@ -298,7 +277,6 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
 
             return ingredientNames;
         }
-
         @Override
         protected void onPostExecute(ArrayList<String> ingredientNames) {
             if (ingredientNames != null) {
@@ -306,7 +284,6 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
                 ingredientAutocompleteAdapter.addAll(ingredientNames);
             }
         }
-
     }
 }
 

@@ -98,31 +98,37 @@ public class DisplayRecipeSelected extends AppCompatActivity
         }
 
         @Override
-        protected void onPostExecute(JSONObject result)
+        protected void onPostExecute(JSONObject parsedObjectResult)
         {
-            super.onPostExecute(result);
-            //updating UI with data from results of JSONObject all fields from API are set here
-            //recipe name, photo, number of servings, calories, cooking time
-            //ingredients and instructions
-            try
-            {
-                selectedRecipeTitle.setText(result.getString("title"));
-                displayIngredients(result);
-                displayInstructions(result);
-                displayCalories(result);
-                displayPrepTime(result);
-                displayPortions(result);
+            super.onPostExecute(parsedObjectResult);
+            displayRecipeInformation(parsedObjectResult);
 
-                //Picasso extracts the recipe photo contained in the field "image"
-                // and displays it on the screen using the ImageView widget
-                Picasso.get().load(result.getString("image")).into(selectedRecipePhoto);
+    }
 
-            }
-            catch (JSONException e)
-            {
-                throw new RuntimeException(e);
-            }
+    private void displayRecipeInformation(JSONObject result)
+    {
+        //updating UI with data from results of JSONObject all fields from API are set here
+        //recipe name, photo, number of servings, calories, cooking time
+        //ingredients and instructions
+        try
+        {
+            selectedRecipeTitle.setText(result.getString("title"));
+            displayIngredients(result);
+            displayInstructions(result);
+            displayCalories(result);
+            displayPrepTime(result);
+            displayPortions(result);
+
+            //Picasso extracts the recipe photo contained in the field "image"
+            // and displays it on the screen using the ImageView widget
+            Picasso.get().load(result.getString("image")).into(selectedRecipePhoto);
+
         }
+        catch (JSONException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
     }
     private void displayPrepTime(JSONObject result) throws JSONException
     {

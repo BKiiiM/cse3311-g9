@@ -43,7 +43,7 @@ public class SearchByNameActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_by_name);
 
-        //create references to input text box, button and list view
+        //create references to xml elements
         inputRecipeName = findViewById(R.id.recipe_name_input_box);
         searchButton = findViewById(R.id.search_name_button);
         resultListByName = findViewById(R.id.result_recipe_list);
@@ -52,16 +52,13 @@ public class SearchByNameActivity extends AppCompatActivity
         ExcludeDairy = findViewById(R.id.dairy_checkBox);
         ExcludePeanut = findViewById(R.id.peanut_checkbox);
 
-        //changed message title to test the api call
         RecipeNameMessage =findViewById(R.id.enter_recipe_name_TextView);
 
-        //We need an array adapter to convert the ArrayList of objects (recipeList) into View items
-        // that will be loaded into the ListView container.
+        //Array adapter converts the ArrayList of objects (recipeList) into
+        //View items that will be loaded into the ListView container.
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipeList);
         resultListByName.setAdapter(adapter);
         resultListByName.setOnItemClickListener(this::onItemClick);
-
-
 
         searchButton.setOnClickListener(v ->
         {
@@ -72,9 +69,8 @@ public class SearchByNameActivity extends AppCompatActivity
             }
         });
     }
-
-    //we need to know the index of the recipe selected by the user
-    //to extract information from the recipe
+    //Get index of the recipe selected by the user
+    //Use index to extract recipe information
     private void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
     {
         RecipeSummary recipeData = recipeList.get(i);
@@ -85,14 +81,14 @@ public class SearchByNameActivity extends AppCompatActivity
         SearchByNameActivity.this.startActivity(myIntent);
 
     }
-
     private class recipeSearchByName extends AsyncTask<String, Void, ArrayList<RecipeSummary>>
     {
         @Override
         protected ArrayList<RecipeSummary> doInBackground(String... params)
         {
-
+            //create a string to add intolerances to API call
             String intolerances = "";
+
             if (ExcludeGluten.isChecked())
             {
                 intolerances = "gluten";
@@ -106,12 +102,8 @@ public class SearchByNameActivity extends AppCompatActivity
                 intolerances = intolerances+",peanut";
             }
 
-
-
-
             String query = params[0];
             ArrayList<RecipeSummary> result = new ArrayList<>();
-
             try {
                 //creates string with entire url to search using HttpURLConnection
                 String spoonacularUrl = "https://api.spoonacular.com/recipes/complexSearch" +
@@ -121,21 +113,14 @@ public class SearchByNameActivity extends AppCompatActivity
                         "&cuisine=" + cuisine +
                         "&number=30"; //number of results shown, we can change this number
 
-                //THIS PRINTOUT TESTS OUR API CALL
-               /*String test =spoonacularUrl;
-                       Test.setText(test);*/
-
                 URL url = new URL(spoonacularUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
-
-
                 //asks for response from url
                 int responseCode = connection.getResponseCode();
 
                 if (responseCode == HttpURLConnection.HTTP_OK)
                 {
-
                     BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                     StringBuilder response = new StringBuilder();
                     String line;
@@ -168,7 +153,6 @@ public class SearchByNameActivity extends AppCompatActivity
 
             return result;
         }
-
         @Override
         protected void onPostExecute(ArrayList<RecipeSummary> result)
         {

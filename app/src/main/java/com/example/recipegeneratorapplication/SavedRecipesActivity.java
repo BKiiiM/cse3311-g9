@@ -98,7 +98,6 @@ public class SavedRecipesActivity extends AppCompatActivity implements RecipeAda
         intent.putExtra("id", recipe.getId());
         startActivity(intent);
     }
-
     private class FetchRecipeTask extends AsyncTask<String, Void, RecipeSummary> {
         @Override
         protected RecipeSummary doInBackground(String... params) {
@@ -155,7 +154,6 @@ public class SavedRecipesActivity extends AppCompatActivity implements RecipeAda
             }
         }
     }
-
     public void getRecipeInfo(String recipeId) {
         // Start the FetchRecipeTask to fetch recipe data
         new FetchRecipeTask().execute(recipeId);
