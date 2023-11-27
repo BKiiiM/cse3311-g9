@@ -43,4 +43,18 @@
     <string name="one_serving">1 serving</string>
     <string name="exclude_peanut">exclude peanut</string>
     <string name="input_name_message">Enter Recipe Name</string>
+    <string-array name="cuisines">
+        <item>Cajun</item>
+        <item>Caribbean</item>
+        <item>Chinese</item>
+        <item>French</item>
+        <item>Greek</item>
+        <item>Indian</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+        <item>Mexican</item>
+        <item>Thai</item>
+        <item>Vietnamese</item>
+    </string-array>
 </resources>
