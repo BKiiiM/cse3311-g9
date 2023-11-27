@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:background="@drawable/temp_background2">
+    android:background="@drawable/temp_background2"
+    tools:context=".LoginActivity">
 
 
     <TextView
@@ -71,13 +71,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_below="@id/password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:padding="20dp"
-        >
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/login_button"
@@ -85,7 +84,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/input_bg"
             android:text="LOGIN"
-          android:textColor="@color/white"
+            android:textColor="@color/white"
             android:textSize="24sp" />
 
         <TextView
@@ -104,13 +103,12 @@
         <TextView
             android:id="@+id/SignInGoogleText"
             android:layout_width="wrap_content"
-            android:layout_marginTop="10sp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
             android:text="Sign in with Google"
             android:textColor="@color/white"
             android:textSize="14sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/GoogleIcon"
