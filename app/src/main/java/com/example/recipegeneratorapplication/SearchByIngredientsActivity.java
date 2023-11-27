@@ -30,13 +30,11 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
     AutoCompleteTextView ingredient3;
     AutoCompleteTextView ingredient4;
     AutoCompleteTextView ingredient5;
-    AutoCompleteTextView cuisine;
     Button searchByIngredientButton;
     ListView resultListByIngredients;
     ArrayAdapter<RecipeSummary> adapterView;
     ArrayList<RecipeSummary> listByIngredients = new ArrayList<>();
     ArrayAdapter<String> ingredientAutocompleteAdapter;
-
 
 
     @Override
@@ -50,7 +48,6 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
         ingredient3 =findViewById(R.id.ingredient_3_input);
         ingredient4 =findViewById(R.id.ingredient_4_input);
         ingredient5 =findViewById(R.id.ingredient_5_input);
-        cuisine     =findViewById(R.id.cuisine_input);
         searchByIngredientButton =findViewById(R.id.search_ingredients);
         resultListByIngredients = findViewById(R.id.result_search_ingredients_ListView);
 
@@ -201,7 +198,7 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
 
                 //creates string with entire url to search using HttpURLConnection
                 String spoonacularUrl = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=" + API_KEY +
-                        "&ingredients=" + ingredientInput + "&number=30" + "&cuisine=" + cuisine;
+                        "&ingredients=" + ingredientInput + "&number=30";
 
                 URL url = new URL(spoonacularUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();

@@ -104,19 +104,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingredient_4_input" />
 
-    <AutoCompleteTextView
-        android:id="@+id/cuisine_input"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:fontFamily="sans-serif"
-        android:hint="@string/cuisine"
-        android:inputType="text"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredient_5_input" />
-
     <ListView
         android:id="@+id/result_search_ingredients_ListView"
         android:layout_width="391dp"
@@ -132,10 +119,11 @@
         android:id="@+id/search_ingredients"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/button_search_ingredients"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cuisine_input" />
+        app:layout_constraintTop_toBottomOf="@+id/ingredient_5_input" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
