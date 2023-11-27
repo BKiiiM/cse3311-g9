@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/background"
     tools:context=".SearchByNameActivity">
 
 
     <TextView
         android:id="@+id/enter_recipe_name_TextView"
-        android:backgroundTint="@color/purple_200"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@color/white"
         android:ems="10"
         android:fontFamily="sans-serif-light"
         android:minHeight="48dp"
@@ -37,10 +37,12 @@
         android:layout_height="54dp"
         android:layout_marginTop="10dp"
         android:autofillHints="@string/recipe_autofill"
+        android:background="@color/white"
         android:ems="10"
         android:hint="@string/hint_user_input_recipe_name"
         android:inputType="text"
         android:text="@string/recipe_name_input_box"
+        android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,9 +57,11 @@
         android:layout_marginTop="10dp"
 
         android:autofillHints="@string/recipe_autofill"
+        android:background="@color/white"
         android:ems="10"
         android:hint="@string/cuisine"
         android:inputType="text"
+        android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,10 +76,9 @@
         android:layout_height="67dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="10dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cuisine_input">
 
@@ -84,6 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="@color/white"
             android:ems="8"
             android:text="@string/exclude_gluten" />
 
@@ -92,6 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="@color/white"
             android:ems="8"
             android:text="@string/exclude_dairy" />
 
@@ -100,6 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="@color/white"
             android:ems="8"
             android:text="@string/exclude_peanut" />
     </LinearLayout>

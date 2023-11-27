@@ -48,6 +48,7 @@ public class SearchByNameActivity extends AppCompatActivity
         searchButton = findViewById(R.id.search_name_button);
         resultListByName = findViewById(R.id.result_recipe_list);
         cuisine = findViewById(R.id.cuisine_input);
+        //cuisine = thisView.getResources().getStringArray(R.array.cuisines);
         ExcludeGluten = findViewById(R.id.gluten_checkBox);
         ExcludeDairy = findViewById(R.id.dairy_checkBox);
         ExcludePeanut = findViewById(R.id.peanut_checkbox);
