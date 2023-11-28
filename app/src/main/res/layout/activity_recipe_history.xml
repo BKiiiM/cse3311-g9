@@ -38,4 +38,14 @@
         android:layout_below="@+id/saved_recipes_layout"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
+
+    <Button
+        android:id="@+id/clearHistoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:text="Clear History"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
