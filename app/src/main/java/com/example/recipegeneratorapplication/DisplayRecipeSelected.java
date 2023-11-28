@@ -204,7 +204,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
         JSONArray extendedIngredientsArr = result.getJSONArray("extendedIngredients");
         String selectedIngredients = "";
         String allSelectedIngredients = "";
-        for(int i=0; i< extendedIngredientsArr.length();i++)
+        for(int i= 0; i< extendedIngredientsArr.length();i++)
         {
             String ingredientName;
             String ingredientUnit;
@@ -221,7 +221,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
             formatIngredientAmount = Double.parseDouble(formatDouble(ingredientAmount));
             selectedIngredients = formatIngredientAmount +" " + ingredientUnit + " " + ingredientName;
 
-            allSelectedIngredients = allSelectedIngredients+selectedIngredients+"\n";
+            allSelectedIngredients = allSelectedIngredients + selectedIngredients+"\n";
 
         }
         // display the ingredients from the selected recipe on the screen
@@ -262,7 +262,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
 
         RecipeServingSize = findViewById(R.id.serving_size_spinner);
         ArrayList<String> spinnerOptions = new ArrayList<String>();
-        int counter =0;
+        int counter;
         for(counter = 0; counter< 10; counter++)
         {
             if (counter==0)

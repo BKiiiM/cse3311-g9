@@ -90,7 +90,7 @@
                         android:text="25 minutes"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="48dp"/>
                 </LinearLayout>
                 <LinearLayout
                         android:orientation="vertical"
@@ -102,12 +102,13 @@
                         android:src="@drawable/baseline_group_24"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
+
                     <Spinner
                         android:id="@+id/serving_size_spinner"
-                        android:padding="8dp"
-                        android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="48dp"
+                        android:gravity="center"
+                        android:padding="8dp" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -128,7 +129,7 @@
                         android:text="calories"
                         android:textColor="@color/black"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="48dp"/>
 
                 </LinearLayout>
 
@@ -143,6 +144,7 @@
                 android:text="favorite"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/ingredient_title"
                 android:layout_width="360dp"
