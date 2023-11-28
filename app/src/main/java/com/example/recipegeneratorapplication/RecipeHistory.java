@@ -28,24 +28,24 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SavedRecipesActivity extends AppCompatActivity implements RecipeAdapter.OnRecipeClickListener {
+public class RecipeHistory extends AppCompatActivity implements RecipeAdapter.OnRecipeClickListener {
 
     // Declare member variables
     private RecyclerView recyclerView;
     private RecipeAdapter adapter;
-    private List<RecipeSummary> savedRecipes;
+    private List<RecipeSummary> recipeHistory;
     private static final String API_KEY = BuildConfig.SPOONACULAR_API_KEY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_saved_recipes);
+        setContentView(R.layout.activity_recipe_history);
 
         recyclerView = findViewById(R.id.recyclerView); // Initialize the RecyclerView
-        recyclerView.setLayoutManager(new LinearLayoutManager(SavedRecipesActivity.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(RecipeHistory.this));
 
-        savedRecipes = new ArrayList<>();
-        adapter = new RecipeAdapter(SavedRecipesActivity.this, savedRecipes, this);
+        recipeHistory = new ArrayList<>();
+        adapter = new RecipeAdapter(RecipeHistory.this, recipeHistory, this);
         recyclerView.setAdapter(adapter);
 
         // Initialize Firebase Authentication
@@ -59,26 +59,23 @@ public class SavedRecipesActivity extends AppCompatActivity implements RecipeAda
             // Get a reference to the Firebase database
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users"); // Replace with your database reference path
 
-            // Reference to the user's node in the database
-            DatabaseReference userReference = databaseReference.child(userId).child("favoriteRecipes");
+            // Reference to the user's node in the database for recipe history
+            DatabaseReference historyReference = databaseReference.child(userId).child("recipeHistory");
 
-            userReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            historyReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     // This method is called when data changes in the database
-                    List<String> savedRecipeIds = new ArrayList<>();
+                    List<String> recipeIds = new ArrayList<>();
 
-                    // Loop through the data to get the saved recipe IDs.
+                    // Loop through the data to get the recipe IDs.
                     for (DataSnapshot recipeSnapshot : dataSnapshot.getChildren()) {
-                        String recipeId = recipeSnapshot.getKey();
-                        boolean isSaved = recipeSnapshot.getValue(Boolean.class);
-                        if (isSaved) {
-                            savedRecipeIds.add(recipeId);
-                        }
+                        String recipeId = String.valueOf(recipeSnapshot.getValue());
+                        recipeIds.add(recipeId);
                     }
 
-                    // Retrieve the recipe data for each ID and update your savedRecipes list.
-                    for (String recipeId : savedRecipeIds) {
+                    // Retrieve the recipe data for each ID and update the recipeHistory list.
+                    for (String recipeId : recipeIds) {
                         getRecipeInfo(recipeId);
                     }
                 }
@@ -96,7 +93,7 @@ public class SavedRecipesActivity extends AppCompatActivity implements RecipeAda
     @Override
     public void onRecipeClick(RecipeSummary recipe) {
         // Handle the click event when a recipe card is clicked
-        Intent intent = new Intent(SavedRecipesActivity.this, DisplayRecipeSelected.class);
+        Intent intent = new Intent(RecipeHistory.this, DisplayRecipeSelected.class);
         intent.putExtra("id", recipe.getId());
         startActivity(intent);
     }
@@ -151,7 +148,7 @@ public class SavedRecipesActivity extends AppCompatActivity implements RecipeAda
         @Override
         protected void onPostExecute(RecipeSummary recipeData) {
             // This method runs on the main thread and can update the UI
-            savedRecipes.add(recipeData);
+            recipeHistory.add(recipeData);
             if (adapter != null) {
                 adapter.notifyDataSetChanged();
             }
@@ -162,5 +159,4 @@ public class SavedRecipesActivity extends AppCompatActivity implements RecipeAda
         // Start the FetchRecipeTask to fetch recipe data
         new FetchRecipeTask().execute(recipeId);
     }
-
 }
