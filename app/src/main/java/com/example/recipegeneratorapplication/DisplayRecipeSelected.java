@@ -1,9 +1,9 @@
 package com.example.recipegeneratorapplication;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,11 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
-import com.google.gson.annotations.JsonAdapter;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -23,10 +20,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,7 +41,9 @@ public class DisplayRecipeSelected extends AppCompatActivity
     TextView selectedRecipeInstructions;
     TextView selectedRecipeCalories;
     TextView selectedRecipePrepTime;
-    TextView selectedRecipeServings;
+    Spinner RecipeServingSize;
+    ArrayAdapter<String> spinnerAdapter;
+    List<String> items;
 
     int recipeId;
     private FirebaseAuth mAuth;
@@ -117,7 +117,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
             displayInstructions(result);
             displayCalories(result);
             displayPrepTime(result);
-            displayPortions(result);
+            displaySpinnerServingSize(result);
 
             //Picasso extracts the recipe photo contained in the field "image"
             // and displays it on the screen using the ImageView widget
@@ -135,10 +135,10 @@ public class DisplayRecipeSelected extends AppCompatActivity
         int prepTime = result.getInt("readyInMinutes");
         selectedRecipePrepTime.setText(prepTime+" Minutes");
     }
-    private void displayPortions(JSONObject result) throws JSONException
+    private void displaySpinnerServingSize(JSONObject result) throws JSONException
     {
         int numberOfServings = result.getInt("servings");
-        selectedRecipeServings.setText(numberOfServings+" Servings");
+        RecipeServingSize.setSelection(numberOfServings-1);
     }
     private void displayCalories(JSONObject result)throws JSONException
     {
@@ -220,10 +220,28 @@ public class DisplayRecipeSelected extends AppCompatActivity
         selectedRecipeTitle = findViewById(R.id.recipe_title);
         selectedRecipePhoto = findViewById(R.id.recipe_photo);
         selectedRecipeCalories = findViewById(R.id.TextView_calories);
-        selectedRecipeServings = findViewById(R.id.TextView_portions);
         selectedRecipePrepTime = findViewById(R.id.TextView_preparation_time);
         selectedRecipeIngredients = findViewById(R.id.selected_recipe_ingredients);
         selectedRecipeInstructions = findViewById(R.id.selected_recipe_instructions);
+
+        RecipeServingSize = findViewById(R.id.serving_size_spinner);
+        ArrayList<String> spinnerOptions = new ArrayList<String>();
+        int counter =0;
+        for(counter = 0; counter< 10; counter++)
+        {
+            if (counter==0)
+            {
+                spinnerOptions.add(counter+1+" Serving");
+            }
+            else
+                spinnerOptions.add(counter+1 +" Servings");
+        }
+
+        spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerOptions);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        RecipeServingSize.setAdapter(spinnerAdapter);
+
 
         Button favoriteButton = findViewById(R.id.favorite_button);
         favoriteButton.setOnClickListener(v -> {
@@ -242,11 +260,6 @@ public class DisplayRecipeSelected extends AppCompatActivity
 
         new CheckFavoriteRecipeTask().execute(recipeId);
 
-
-
-        //displays the recipe id on screen just to test the function
-        // selectedRecipeId.setText(id+"");
-        // selectedRecipeIngredients.setText("");
         new recipeSearchById().execute(id);
 
 
