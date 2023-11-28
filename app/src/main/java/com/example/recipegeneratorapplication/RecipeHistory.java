@@ -9,7 +9,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -88,6 +93,14 @@ public class RecipeHistory extends AppCompatActivity implements RecipeAdapter.On
         } else {
             // Handle the case when the user is not logged in.
         }
+
+        Button clearHistoryButton = findViewById(R.id.clearHistoryButton);
+        clearHistoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearRecipeHistory();
+            }
+        });
     }
 
     @Override
@@ -158,5 +171,36 @@ public class RecipeHistory extends AppCompatActivity implements RecipeAdapter.On
     public void getRecipeInfo(String recipeId) {
         // Start the FetchRecipeTask to fetch recipe data
         new FetchRecipeTask().execute(recipeId);
+    }
+
+    private void clearRecipeHistory() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+
+        if (user != null) {
+            String userId = user.getUid();
+
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
+            DatabaseReference historyReference = databaseReference.child(userId).child("recipeHistory");
+
+            // Remove all data under the "recipeHistory" node for the current user
+            historyReference.removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Successfully cleared history
+                            recipeHistory.clear(); // Clear local list
+                            adapter.notifyDataSetChanged(); // Update RecyclerView
+                            Toast.makeText(RecipeHistory.this, "History cleared", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Handle failure
+                            Toast.makeText(RecipeHistory.this, "Failed to clear history", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
 }
