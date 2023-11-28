@@ -25,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -208,6 +209,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
             String ingredientName;
             String ingredientUnit;
             double ingredientAmount;
+            double formatIngredientAmount;
 
             JSONObject extendedIngredientElement = extendedIngredientsArr.getJSONObject(i);
             ingredientName = extendedIngredientElement.getString("name");
@@ -216,14 +218,20 @@ public class DisplayRecipeSelected extends AppCompatActivity
 
             //adapts the ingredient amount to the user requested serving size amount
             ingredientAmount = (ingredientAmount * servingSize)/apiServingSize;
-            selectedIngredients = ingredientAmount +" " + ingredientUnit + " " + ingredientName;
+            formatIngredientAmount = Double.parseDouble(formatDouble(ingredientAmount));
+            selectedIngredients = formatIngredientAmount +" " + ingredientUnit + " " + ingredientName;
+
             allSelectedIngredients = allSelectedIngredients+selectedIngredients+"\n";
 
         }
         // display the ingredients from the selected recipe on the screen
         selectedRecipeIngredients.setText(allSelectedIngredients);
     }
-
+    private String formatDouble(double value) {
+        // Use DecimalFormat to format the double with one decimal place
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+        return decimalFormat.format(value);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
