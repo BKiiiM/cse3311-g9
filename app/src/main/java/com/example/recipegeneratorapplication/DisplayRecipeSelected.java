@@ -1,5 +1,7 @@
 package com.example.recipegeneratorapplication;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -42,8 +45,10 @@ public class DisplayRecipeSelected extends AppCompatActivity
     TextView selectedRecipeCalories;
     TextView selectedRecipePrepTime;
     Spinner RecipeServingSize;
+    int servingSize;
+    JSONObject recipeData;
     ArrayAdapter<String> spinnerAdapter;
-    List<String> items;
+
 
     int recipeId;
     private FirebaseAuth mAuth;
@@ -63,7 +68,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
                 //creates url string for Spoonacular search
                 //we add to the string includeNutrition=true to get calories,servings and
                 //preparation time information from spoonacular API
-                String spoonacularUrl = "https://api.spoonacular.com/recipes/" +id+"/information"+
+                String spoonacularUrl = "https://api.spoonacular.com/recipes/" + id + "/information" +
                         "?includeNutrition=true&apiKey=" + API_KEY;
                 //creates a pointer to the Spoonacular database host site
                 URL url = new URL(spoonacularUrl);
@@ -101,10 +106,23 @@ public class DisplayRecipeSelected extends AppCompatActivity
         protected void onPostExecute(JSONObject parsedObjectResult)
         {
             super.onPostExecute(parsedObjectResult);
+           //spinner is updated with serving size from api call
+            try
+            {
+                displaySpinnerServingSize(parsedObjectResult);
+                //set serving size according to api return information
+                servingSize = parsedObjectResult.getInt("servings");
+            } catch (JSONException e)
+            {
+                throw new RuntimeException(e);
+            }
+
             displayRecipeInformation(parsedObjectResult);
+            recipeData = parsedObjectResult;
 
+
+        }
     }
-
     private void displayRecipeInformation(JSONObject result)
     {
         //updating UI with data from results of JSONObject all fields from API are set here
@@ -117,7 +135,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
             displayInstructions(result);
             displayCalories(result);
             displayPrepTime(result);
-            displaySpinnerServingSize(result);
+
 
             //Picasso extracts the recipe photo contained in the field "image"
             // and displays it on the screen using the ImageView widget
@@ -129,7 +147,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
             throw new RuntimeException(e);
         }
     }
-    }
+
     private void displayPrepTime(JSONObject result) throws JSONException
     {
         int prepTime = result.getInt("readyInMinutes");
@@ -180,6 +198,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
 
     private void displayIngredients(JSONObject result) throws JSONException
     {
+        int apiServingSize = result.getInt("servings");
         // get array of objects extendedIngredients so we can access the field "original"
         // "original" contains each ingredient needed for the recipe
         JSONArray extendedIngredientsArr = result.getJSONArray("extendedIngredients");
@@ -187,15 +206,32 @@ public class DisplayRecipeSelected extends AppCompatActivity
         String allSelectedIngredients = "";
         for(int i=0; i< extendedIngredientsArr.length();i++)
         {
+            String ingredientName;
+            String ingredientUnit;
+            double ingredientAmount;
+            double formatIngredientAmount;
+
             JSONObject extendedIngredientElement = extendedIngredientsArr.getJSONObject(i);
-            selectedIngredients = extendedIngredientElement.getString("original");
+            ingredientName = extendedIngredientElement.getString("name");
+            ingredientUnit = extendedIngredientElement.getString("unit");
+            ingredientAmount = extendedIngredientElement.getDouble("amount");
+
+            //adapts the ingredient amount to the user requested serving size amount
+            ingredientAmount = (ingredientAmount * servingSize)/apiServingSize;
+            formatIngredientAmount = Double.parseDouble(formatDouble(ingredientAmount));
+            selectedIngredients = formatIngredientAmount +" " + ingredientUnit + " " + ingredientName;
+
             allSelectedIngredients = allSelectedIngredients+selectedIngredients+"\n";
 
         }
         // display the ingredients from the selected recipe on the screen
         selectedRecipeIngredients.setText(allSelectedIngredients);
     }
-
+    private String formatDouble(double value) {
+        // Use DecimalFormat to format the double with one decimal place
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+        return decimalFormat.format(value);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -241,7 +277,21 @@ public class DisplayRecipeSelected extends AppCompatActivity
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         RecipeServingSize.setAdapter(spinnerAdapter);
-
+        RecipeServingSize.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if(recipeData != null)
+                {
+                    //set serving size according to user choice
+                    servingSize = position+1;
+                    displayRecipeInformation(recipeData);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Do nothing here
+            }
+        });
 
         Button favoriteButton = findViewById(R.id.favorite_button);
         favoriteButton.setOnClickListener(v -> {
@@ -261,7 +311,6 @@ public class DisplayRecipeSelected extends AppCompatActivity
         new CheckFavoriteRecipeTask().execute(recipeId);
 
         new recipeSearchById().execute(id);
-
 
     }
 
