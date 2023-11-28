@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/activity_background"
+    android:background="@color/white"
+
     tools:context=".SearchByNameActivity">
 
 
     <TextView
         android:id="@+id/enter_recipe_name_TextView"
+        android:backgroundTint="@color/purple_200"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -20,14 +22,10 @@
         android:paddingTop="8dp"
         android:paddingRight="8dp"
         android:paddingBottom="8dp"
-        android:shadowColor="@color/text_shadow"
-        android:shadowDx="-2"
-        android:shadowDy="-2"
-        android:shadowRadius="50"
         android:singleLine="false"
         android:text="@string/input_name_message"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,12 +38,10 @@
         android:layout_height="54dp"
         android:layout_marginTop="10dp"
         android:autofillHints="@string/recipe_autofill"
-        android:background="@color/white"
         android:ems="10"
         android:hint="@string/hint_user_input_recipe_name"
         android:inputType="text"
         android:text="@string/recipe_name_input_box"
-        android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,11 +56,9 @@
         android:layout_marginTop="10dp"
 
         android:autofillHints="@string/recipe_autofill"
-        android:background="@color/white"
         android:ems="10"
         android:hint="@string/cuisine"
         android:inputType="text"
-        android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,14 +69,14 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="400dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="405dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cuisine_input">
 
@@ -90,41 +84,41 @@
             android:id="@+id/gluten_checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:background="@color/white"
             android:ems="8"
-            android:text="@string/exclude_gluten" />
+            android:text="@string/gluten_free_string" />
 
         <CheckBox
             android:id="@+id/dairy_checkBox"
-            android:layout_width="121dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
-            android:background="@color/white"
             android:ems="8"
-            android:text="@string/exclude_dairy" />
+            android:text="@string/dairy_free_string" />
 
         <CheckBox
             android:id="@+id/peanut_checkbox"
-            android:layout_width="138dp"
+            android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@color/white"
+            android:layout_marginEnd="10dp"
             android:ems="8"
-            android:text="@string/exclude_peanut" />
+            android:text="@string/peanut_free_string" />
     </LinearLayout>
 
     <Button
 
         android:id="@+id/search_name_button"
-        android:layout_width="180dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/input_bg"
         android:text="@string/search_name"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="22sp"
+        android:textSize="16sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"

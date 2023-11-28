@@ -102,15 +102,12 @@
                         android:src="@drawable/baseline_group_24"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
-                    <TextView
-                        android:id="@+id/TextView_portions"
-                        android:gravity="center"
-                        android:textSize="14sp"
+                    <Spinner
+                        android:id="@+id/serving_size_spinner"
                         android:padding="8dp"
-                        android:text="portions"
-                        android:textColor="@color/black"
+                        android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -137,15 +134,15 @@
 
             </LinearLayout>
 
-                
+
             <Button
                 android:id="@+id/favorite_button"
-                android:layout_width="200dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/input_bg"
                 android:text="favorite"
                 android:textColor="@color/white"
-                android:textSize="24sp" />
+                android:textSize="16sp" />
             <TextView
                 android:id="@+id/ingredient_title"
                 android:layout_width="360dp"
