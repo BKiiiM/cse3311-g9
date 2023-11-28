@@ -1,4 +1,5 @@
 package com.example.recipegeneratorapplication;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -6,12 +7,21 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -180,6 +190,7 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
     private void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         RecipeSummary recipeData = listByIngredients.get(i);
         int recipeId = recipeData.getId();
+        saveRecipeToHistory(recipeData.getId()); // Save clicked recipe to history
         Intent myIntent = new Intent(SearchByIngredientsActivity.this, DisplayRecipeSelected.class);
         myIntent.putExtra("id", recipeId);
         SearchByIngredientsActivity.this.startActivity(myIntent);
@@ -304,6 +315,62 @@ public class SearchByIngredientsActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    private void saveRecipeToHistory(int recipeId) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+
+        if (user != null) {
+            String userId = user.getUid();
+            DatabaseReference historyReference = FirebaseDatabase.getInstance().getReference("users")
+                    .child(userId).child("recipeHistory");
+
+            historyReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    boolean recipeExists = false;
+
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Integer savedRecipeId = snapshot.getValue(Integer.class);
+                        if (savedRecipeId != null && savedRecipeId.equals(recipeId)) {
+                            recipeExists = true;
+                            break;
+                        }
+                    }
+
+                    if (!recipeExists) {
+                        long historySize = dataSnapshot.getChildrenCount();
+
+                        if (historySize >= 5) {
+                            removeOldestRecipe(historyReference);
+                        }
+
+                        historyReference.child(String.valueOf(System.currentTimeMillis())).setValue(recipeId);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle error
+                }
+            });
+        }
+    }
+
+    private void removeOldestRecipe(DatabaseReference historyReference) {
+        historyReference.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                DataSnapshot oldestRecipe = dataSnapshot.getChildren().iterator().next();
+                oldestRecipe.getRef().removeValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+            }
+        });
     }
 }
 

@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".RecipeHistory"
+            android:exported="false" />
+        <activity
             android:name=".SavedRecipesActivity"
             android:exported="false" />
         <activity

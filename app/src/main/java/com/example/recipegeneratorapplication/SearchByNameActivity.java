@@ -12,7 +12,16 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -76,7 +85,7 @@ public class SearchByNameActivity extends AppCompatActivity
     {
         RecipeSummary recipeData = recipeList.get(i);
         int recipeId = recipeData.getId();
-
+        saveRecipeToHistory(recipeData.getId()); // Save clicked recipe to history
         Intent myIntent = new Intent(SearchByNameActivity.this, DisplayRecipeSelected.class);
         myIntent.putExtra("id", recipeId);
         SearchByNameActivity.this.startActivity(myIntent);
@@ -162,6 +171,62 @@ public class SearchByNameActivity extends AppCompatActivity
             recipeList.addAll(result);
             adapter.notifyDataSetChanged();
         }
+    }
+
+    private void saveRecipeToHistory(int recipeId) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+
+        if (user != null) {
+            String userId = user.getUid();
+            DatabaseReference historyReference = FirebaseDatabase.getInstance().getReference("users")
+                    .child(userId).child("recipeHistory");
+
+            historyReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    boolean recipeExists = false;
+
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Integer savedRecipeId = snapshot.getValue(Integer.class);
+                        if (savedRecipeId != null && savedRecipeId.equals(recipeId)) {
+                            recipeExists = true;
+                            break;
+                        }
+                    }
+
+                    if (!recipeExists) {
+                        long historySize = dataSnapshot.getChildrenCount();
+
+                        if (historySize >= 5) {
+                            removeOldestRecipe(historyReference);
+                        }
+
+                        historyReference.child(String.valueOf(System.currentTimeMillis())).setValue(recipeId);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle error
+                }
+            });
+        }
+    }
+
+    private void removeOldestRecipe(DatabaseReference historyReference) {
+        historyReference.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                DataSnapshot oldestRecipe = dataSnapshot.getChildren().iterator().next();
+                oldestRecipe.getRef().removeValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+            }
+        });
     }
 }
 
