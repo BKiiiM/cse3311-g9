@@ -47,4 +47,5 @@
     <string name="gluten_free_string">gluten-free</string>
     <string name="peanut_free_string">peanut-free</string>
     <string name="dairy_free_string">dairy-free</string>
+    <string name="favorite_recipes_button">Favorite Recipes</string>
 </resources>
