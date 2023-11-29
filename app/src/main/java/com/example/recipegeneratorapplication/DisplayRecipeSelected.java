@@ -209,7 +209,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
             String ingredientName;
             String ingredientUnit;
             double ingredientAmount;
-            double formatIngredientAmount;
+            String formatIngredientAmount;
 
             JSONObject extendedIngredientElement = extendedIngredientsArr.getJSONObject(i);
             ingredientName = extendedIngredientElement.getString("name");
@@ -218,7 +218,7 @@ public class DisplayRecipeSelected extends AppCompatActivity
 
             //adapts the ingredient amount to the user requested serving size amount
             ingredientAmount = (ingredientAmount * servingSize)/apiServingSize;
-            formatIngredientAmount = Double.parseDouble(formatDouble(ingredientAmount));
+            formatIngredientAmount = formatDouble(ingredientAmount);
             selectedIngredients = formatIngredientAmount +" " + ingredientUnit + " " + ingredientName;
 
             allSelectedIngredients = allSelectedIngredients + selectedIngredients+"\n";
