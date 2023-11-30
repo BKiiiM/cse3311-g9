@@ -69,7 +69,7 @@
         android:clickable="true"
         android:ems="8"
         android:fontFamily="sans-serif-thin"
-        android:text="@string/favorite_recipes_button"
+        android:text="@string/saved_recipe"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"
